@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="python爬虫实战——图片自动下载器之前介绍了那么多基本知识，大家也估计手痒了。想要实际做个小东西来看看，毕竟：
+
+talk is cheap show me the code!
+
+#制作爬虫的基本步骤顺便通过这个小例子，可以掌握一些有关制作爬虫的基本的步骤。
+一般来说，制作一个爬虫需要分以下几个步骤：
+
+分析需求（对，需求分析非常重要，不要告诉我你老师没教你）
+分析网页源代码，配合F12（没有">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/2016/05/16/python爬虫实战——图片自动下载器/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="python爬虫实战——图片自动下载器之前介绍了那么多基本知识，大家也估计手痒了。想要实际做个小东西来看看，毕竟：
+
+talk is cheap show me the code!
+
+#制作爬虫的基本步骤顺便通过这个小例子，可以掌握一些有关制作爬虫的基本的步骤。
+一般来说，制作一个爬虫需要分以下几个步骤：
+
+分析需求（对，需求分析非常重要，不要告诉我你老师没教你）
+分析网页源代码，配合F12（没有">
+<meta property="og:image" content="http://yoursite.com/./1460995514922.png">
+<meta property="og:image" content="http://yoursite.com/./1460995532714.png">
+<meta property="og:image" content="http://yoursite.com/./1460995577051.png">
+<meta property="og:image" content="http://yoursite.com/./1460995596137.png">
+<meta property="og:image" content="http://yoursite.com/./1460995806078.png">
+<meta property="og:image" content="http://yoursite.com/./1460995848517.png">
+<meta property="og:image" content="http://yoursite.com/./1460995882834.png">
+<meta property="og:image" content="http://yoursite.com/./1460996087091.png">
+<meta property="og:image" content="http://yoursite.com/./1460996168820.png">
+<meta property="og:image" content="http://yoursite.com/./1460996402549.png">
+<meta property="og:image" content="http://yoursite.com/./1460997577953.png">
+<meta property="og:image" content="http://yoursite.com/./1460996529250.png">
+<meta property="og:image" content="http://yoursite.com/./1460997566573.png">
+<meta property="og:image" content="http://yoursite.com/./1460996645895.png">
+<meta property="og:image" content="http://yoursite.com/./1460997543130.png">
+<meta property="og:image" content="http://yoursite.com/./1460997629096.png">
+<meta property="og:image" content="http://yoursite.com/./1460997642028.png">
+<meta property="og:image" content="http://yoursite.com/./1460997658932.png">
+<meta property="og:image" content="http://yoursite.com/./1460997671127.png">
+<meta property="og:image" content="http://yoursite.com/./1460997692553.png">
+<meta property="og:image" content="http://yoursite.com/./1460998520762.png">
+<meta property="og:image" content="http://yoursite.com/./1460998763605.png">
+<meta property="og:image" content="http://yoursite.com/./1460998745229.png">
+<meta property="og:image" content="http://yoursite.com/./1460998907006.png">
+<meta property="og:updated_time" content="2016-04-21T04:41:24.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Hexo">
+<meta name="twitter:description" content="python爬虫实战——图片自动下载器之前介绍了那么多基本知识，大家也估计手痒了。想要实际做个小东西来看看，毕竟：
+
+talk is cheap show me the code!
+
+#制作爬虫的基本步骤顺便通过这个小例子，可以掌握一些有关制作爬虫的基本的步骤。
+一般来说，制作一个爬虫需要分以下几个步骤：
+
+分析需求（对，需求分析非常重要，不要告诉我你老师没教你）
+分析网页源代码，配合F12（没有">
+<meta name="twitter:image" content="http://yoursite.com/./1460995514922.png">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="Flux RSS"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Rechercher"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" results="0" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-python爬虫实战——图片自动下载器" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2016/05/16/python爬虫实战——图片自动下载器/" class="article-date">
+  <time datetime="2016-05-16T12:05:54.590Z" itemprop="datePublished">2016-05-16</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="python爬虫实战——图片自动下载器"><a href="#python爬虫实战——图片自动下载器" class="headerlink" title="python爬虫实战——图片自动下载器"></a>python爬虫实战——图片自动下载器</h2><p>之前介绍了那么多基本知识，大家也估计手痒了。想要实际做个小东西来看看，毕竟：</p>
+<blockquote>
+<p>talk is cheap show me the code!</p>
+</blockquote>
+<p>#制作爬虫的基本步骤<br>顺便通过这个小例子，可以掌握一些有关制作爬虫的基本的步骤。</p>
+<p>一般来说，制作一个爬虫需要分以下几个步骤：</p>
+<ol>
+<li>分析需求（对，需求分析非常重要，不要告诉我你老师没教你）</li>
+<li>分析网页源代码，配合F12（没有F12那么乱的网页源代码，你想看死我？）</li>
+<li>编写正则表达式或者XPath表达式（就是前面说的那个神器）</li>
+<li>正式编写python爬虫代码</li>
+</ol>
+<p>#效果<br>运行：<br><img src="./1460995514922.png" alt="Alt text"></p>
+<p>恩，让我输入关键词，让我想想，输入什么好呢？好像有点暴露爱好了。<br><img src="./1460995532714.png" alt="Alt text"></p>
+<p>回车</p>
+<p><img src="./1460995577051.png" alt="Alt text"></p>
+<p>好像开始下载了！好赞！，我看看下载的图片，哇瞬间我感觉我又补充了好多表情包….</p>
+<p><img src="./1460995596137.png" alt="Alt text"></p>
+<p>好了，差不多就是这么个东西。</p>
+<p>#需求分析<br>“我想要图片，我又不想上网搜“<br>“最好还能自动下载”<br>……</p>
+<p>这就是需求，好了，我们开始分析需求，首先，搜索图片，最容易想到的就是爬百度图片的结果，好，那我们就上百度图片看看</p>
+<p><img src="./1460995806078.png" alt="Alt text"></p>
+<p>基本就是这样，还挺漂亮的。</p>
+<p>我们试着搜一个东西，我打一个暴字，出来一系列搜索结果，这说明什么….<br><img src="./1460995848517.png" alt="Alt text"></p>
+<p>随便找一个回车<br><img src="./1460995882834.png" alt="Alt text"></p>
+<p>好了，我们已经看到了很多图片了，如果我们能把这里面的图片都爬下来就好了。我们看见网址里有关键词信息</p>
+<p><img src="./1460996087091.png" alt="Alt text"></p>
+<p>我们试着在网址直接换下关键词，跳转了有没有！</p>
+<p><img src="./1460996168820.png" alt="Alt text"></p>
+<p>这样，可以通过这个网址查找特定的关键词的图片，所以理论上，我们可以不用打开网页就能搜索特定的图片了。下个问题就是如何实现自动下载，其实利用之前的知识，我们知道可以用request，获取图片的网址，然后把它爬下来，保存成.jpg就行了。</p>
+<p>所以这个项目就应该可以完成了。</p>
+<p>#分析网页<br>好了，我们开始做下一步，分析网页源代码。这里 我先切换回传统页面，为什么这样做，因为目前百度图片采用的是瀑布流模式，动态加载图片，处理起来很麻烦，传统的翻页界面就好很多了。<br><img src="./1460996402549.png" alt="Alt text"></p>
+<p>这里还一个技巧，就是：能爬手机版就不要爬电脑版，因为手机版的代码很清晰，很容易获取需要的内容。</p>
+<p>好了，切换回传统版本了，还是有页码的看的舒服。<br><img src="./1460997577953.png" alt="Alt text"></p>
+<p>我们点击右键，查看源代码<br><img src="./1460996529250.png" alt="Alt text"></p>
+<p>这都是什么鬼，怎么可能看清！！<br><img src="./1460997566573.png" alt="Alt text"></p>
+<p>这个时候，就要用F12了，开发者工具！我们回到上一页面，按F12，出来下面这个工具栏，我们需要用的就是左上角那个东西，一个是鼠标跟随，一个是切换手机版本，都对我们很有用。我们这里用第一<br><img src="./1460996645895.png" alt="Alt text"></p>
+<p>然后选择你想看源代码的地方，就可以发现，下面的代码区自动定位到了这个位置，是不是很NB!<br><img src="./1460997543130.png" alt="Alt text"></p>
+<p>我们复制这个地址<br><img src="./1460997629096.png" alt="Alt text"></p>
+<p>然后到刚才的乱七八糟的源代码里搜索一下，发现它的位置了！（小样！我还找不到你！)但是这里我们又疑惑了，这个图片怎么有这么多地址，到底用哪个呢？我们可以看到有thumbURL，middleURL，hoverURL，objURL<br><img src="./1460997642028.png" alt="Alt text"></p>
+<p>通过分析可以知道，前面两个是缩小的版本，hover是鼠标移动过后显示的版本，objURL应该是我们需要的，不信可以打开这几个网址看看，发现obj那个最大最清晰。<br><img src="./1460997658932.png" alt="Alt text"></p>
+<p><img src="./1460997671127.png" alt="Alt text"></p>
+<p>好了，找到了图片位置，我们就开始分析它的代码。我看看是不是所有的objURL全是图片</p>
+<p><img src="./1460997692553.png" alt="Alt text"></p>
+<p>貌似都是以.jpg格式结尾的，那应该跑不了了，我们可以看到搜索出61条，说明应该有61个图片</p>
+<p>#编写正则表达式<br>通过前面的学习，写出如下的一条正则表达式不难把？</p>
+<pre><code>pic_url = re.findall(&apos;&quot;objURL&quot;:&quot;(.*?)&quot;,&apos;,html,re.S)
+</code></pre><p>#编写爬虫代码<br>好了，正式开始编写爬虫代码了。这里我们就用了2个包，一个是正则，一个是requests包，之前也介绍过了，没看的回去看！<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#-*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"><span class="keyword">import</span> requests</span><br></pre></td></tr></table></figure></p>
+<p>然后我们把刚才的网址粘过来，传入requests，然后把正则表达式写好，<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">url = <span class="string">'http://image.baidu.com/search/flip?tn=baiduimage&amp;ipn=r&amp;ct=201326592&amp;cl=2&amp;lm=-1&amp;st=-1&amp;fm=result&amp;fr=&amp;sf=1&amp;fmq=1460997499750_R&amp;pv=&amp;ic=0&amp;nc=1&amp;z=&amp;se=1&amp;showtab=0&amp;fb=0&amp;width=&amp;height=&amp;face=0&amp;istype=2&amp;ie=utf-8&amp;word=%E5%B0%8F%E9%BB%84%E4%BA%BA'</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line">html = requests.get(url).text</span><br><span class="line">pic_url = re.findall(<span class="string">'"objURL":"(.*?)",'</span>,html,re.S)</span><br></pre></td></tr></table></figure></p>
+<p>理论有很多图片，所以要循环，我们打印出结果来看看，然后用request获取网址，这里由于有些图片可能存在网址打不开的情况，加个5秒超时控制。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">pic_url = re.findall(<span class="string">'"objURL":"(.*?)",'</span>,html,re.S)</span><br><span class="line">i = <span class="number">0</span></span><br><span class="line"><span class="keyword">for</span> each <span class="keyword">in</span> pic_url:</span><br><span class="line">    <span class="keyword">print</span> each</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        pic= requests.get(each, timeout=<span class="number">10</span>)</span><br><span class="line">    <span class="keyword">except</span> requests.exceptions.ConnectionError:</span><br><span class="line">        <span class="keyword">print</span> <span class="string">'【错误】当前图片无法下载'</span></span><br><span class="line">        <span class="keyword">continue</span></span><br></pre></td></tr></table></figure></p>
+<p>好了，再就是把网址保存下来，我们在事先在当前目录建立一个picture目录，把图片都放进去，命名的时候，用数字命名把<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">string = &apos;pictures\\&apos;+str(i) + &apos;.jpg&apos;</span><br><span class="line">fp = open(string,&apos;wb&apos;)</span><br><span class="line">fp.write(pic.content)</span><br><span class="line">fp.close()</span><br><span class="line">i += 1</span><br></pre></td></tr></table></figure></p>
+<p>整个代码就是这样：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">#-*- coding:utf-8 -*-</span><br><span class="line">import re</span><br><span class="line">import requests</span><br><span class="line"></span><br><span class="line">url = &apos;http://image.baidu.com/search/flip?tn=baiduimage&amp;ipn=r&amp;ct=201326592&amp;cl=2&amp;lm=-1&amp;st=-1&amp;fm=result&amp;fr=&amp;sf=1&amp;fmq=1460997499750_R&amp;pv=&amp;ic=0&amp;nc=1&amp;z=&amp;se=1&amp;showtab=0&amp;fb=0&amp;width=&amp;height=&amp;face=0&amp;istype=2&amp;ie=utf-8&amp;word=%E5%B0%8F%E9%BB%84%E4%BA%BA&apos;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">html = requests.get(url).text</span><br><span class="line">pic_url = re.findall(&apos;&quot;objURL&quot;:&quot;(.*?)&quot;,&apos;,html,re.S)</span><br><span class="line">i = 0</span><br><span class="line">for each in pic_url:</span><br><span class="line">    print each</span><br><span class="line">    try:</span><br><span class="line">        pic= requests.get(each, timeout=10)</span><br><span class="line">    except requests.exceptions.ConnectionError:</span><br><span class="line">        print &apos;【错误】当前图片无法下载&apos;</span><br><span class="line">        continue</span><br><span class="line">    string = &apos;pictures\\&apos;+str(i) + &apos;.jpg&apos;</span><br><span class="line">    fp = open(string,&apos;wb&apos;)</span><br><span class="line">    fp.write(pic.content)</span><br><span class="line">    fp.close()</span><br><span class="line">    i += 1</span><br></pre></td></tr></table></figure>
+<p>我们运行一下，看效果（什么你说这是什么IDE感觉很炫！？赶紧去装Pycharm，看这个文章！）!<br><img src="./1460998520762.png" alt="Alt text"></p>
+<p>好了我们下载了58个图片，咦刚才不是应该是61个吗？<br><img src="./1460998763605.png" alt="Alt text"></p>
+<p>我们看，运行中出现了有一些图片下载不了<br><img src="./1460998745229.png" alt="Alt text"></p>
+<p>我们还看到有图片没显示出来，打开网址看，发现确实没了。<br><img src="./1460998907006.png" alt="Alt text"></p>
+<p>所以，百度有些图片它缓存到了自己的机器上，所以你还能看见，但是实际连接已经失效</p>
+<p>好了，现在自动下载问题解决了，那根据关键词搜索图片呢？只要改url就行了，我这里把代码写下来了</p>
+<pre><code>word = raw_input(&quot;Input key word: &quot;)
+url = &apos;http://image.baidu.com/search/flip?tn=baiduimage&amp;ie=utf-8&amp;word=&apos;+word+&apos;&amp;ct=201326592&amp;v=flip&apos;
+result = requests.get(url)
+</code></pre><p>好了，享受你第一个图片下载爬虫吧！！</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2016/05/16/python爬虫实战——图片自动下载器/" data-id="cio9zhbls00012kcxqyccgrcw" class="article-share-link">Partager</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2016/05/16/Hello-Hexo/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Ancien</strong>
+      <div class="article-nav-title">Hello Hexo</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/05/">May 2016</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Articles récents</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2016/05/16/python爬虫实战——图片自动下载器/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/16/Hello-Hexo/">Hello Hexo</a>
+          </li>
+        
+          <li>
+            <a href="/2016/05/16/hello-world/">Hello World</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2016 John Doe<br>
+      Propulsé by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
