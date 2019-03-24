@@ -1,0 +1,331 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8"/>
+<title>符号表ST（2）—— 初等实现分析和有序符号表 [ HK ' Site ]</title>
+
+  
+  
+    <link rel="stylesheet" href="/css/airy.css">
+  
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+  
+    <link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+  
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="符号表ST（2）—— 初等实现分析和有序符号表"/>
+
+
+
+
+  <meta name="keywords" content="前端, html, css, javascript" />
+
+
+
+
+
+
+
+<script>
+    window.config = {"title":"HK ' Site","subtitle":"一个程序猿的理想国度","description":null,"author":"hawkeye(黄锴)","language":"zh-cn","timezone":null,"url":"http://hksite.cn","root":"/","permalink":":title/","permalink_defaults":"post/","source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"/","code_dir":"downloads/code","i18n_dir":":lang","skip_render":[],"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":false,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"airy","deploy":{"type":"git","repo":"https://github.com/hk029/hksite.git","branch":"master"},"ignore":[],"keywords":"前端, html, css, javascript","auto_category":{"enable":false,"depth":1},"about_dir":"about","index_generator":{"per_page":20,"order_by":"-date","path":""},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"Home":{"url":"/","icon":"fas fa-home"},"About":{"url":"/about","icon":"fas fa-user-astronaut"},"Archives":{"url":"/archives","icon":"fas fa-tags"},"Categories":{"url":"/categories","icon":"fas fa-archive"},"Tags":{"url":"/tags","icon":"fas fa-tags"}},"favicon":"/favicon.ico","stylesheets":["/css/airy.css","/lib/font-awesome/css/all.min.css","/lib/prism/prism.css","/lib/fancybox/fancybox.min.css","/lib/iconfont/iconfont.css"],"custom_logo":{"enabled":false,"image":"/images/voidsky.png"},"scripts":["/lib/prism/prism.js","/lib/jquery/jquery.min.js","/lib/fancybox/fancybox.min.js","/js/airy.js"],"postjs":["/js/scrollspy.js"],"categories":{"english":{"img":"/images/avatar.jpg","intro":"我的英语之路"}},"leancloud":false,"toc":true,"profile":{"photo":{"url":"https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg","round":true},"introduce":"我是要成为海贼王的男人"},"social":{"github":{"icon":"fab fa-github","enable":true,"url":"http://github.com/hk029"},"weixin":{"qrcode":true,"icon":"fab fa-weixin","enable":true,"url":"/images/weixin.jpg"},"weibo":{"icon":"fab fa-weibo","enable":true,"url":"/"},"juejin":{"icon":"iconfont icon-juejin","enable":true,"url":null},"csdn":{"icon":"iconfont icon-logo_csdn","enable":true,"url":null},"jianshu":{"icon":"iconfont icon-jianshu","enable":true,"url":null}}};
+</script>
+</head>
+
+<body>
+  <div class="header-bkg"></div>
+  <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="inner">
+
+
+<div class="site-brand-wrapper">
+    <div class="site-meta">
+        <div class="custom-logo-site-title">
+            
+            <a href="/" class="brand" rel="start">
+                <span class="site-title">HK ' Site</span>
+            </a>
+            
+        </div>
+        
+        
+        <p class="site-subtitle">一个程序猿的理想国度</p>
+        
+        
+    </div>
+    <div clas="nav-menu">
+        <div class="menu-inner">
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-home"></i>
+                
+                
+                <a href="/">首页</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-user-astronaut"></i>
+                
+                
+                <a href="/about">关于</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/archives">归档</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-archive"></i>
+                
+                
+                <div class="category-menu" href="">
+                分类
+                    <div class="category-panel">
+                    <div class="triangle"></div>
+                    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a></li></ul>
+                    </div>
+                </div>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/tags">标签</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</div></div>
+  </header>
+  </div>
+  <div class="content-outer">
+    <div class="inner flex-container">
+      
+
+
+
+
+
+<ul class="breadcrumb">
+  <i class="fas fa-home"></i>
+  <li><a href="/">首页</a></li>
+  
+    
+    
+    
+      
+      <li><a href="/algorithm/">/algorithm</a></li>
+        
+        
+        
+      
+    
+  
+  
+    
+    
+    
+      
+      <li>/St2</li>
+      
+    
+  
+  
+    
+    
+    
+      
+    
+  
+  
+</ul>
+
+
+      
+      
+<article class="post">
+  <div class="right">
+    <div class="card post-toc">
+    <h1 class="title">文章目录</h1>
+    <div>
+
+        
+        
+        
+
+        
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#无序链表"><span class="nav-text">无序链表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有序数组"><span class="nav-text">有序数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#有序符号表"><span class="nav-text">有序符号表</span></a></li></ol></div>
+            
+
+    </div>
+</div>
+  </div>
+  <div class="left">
+    <div class="card">
+      <div class="entry" data-scroll>
+      <div class="post-head">
+        <h1>
+          符号表ST（2）—— 初等实现分析和有序符号表
+        </h1>
+        <div class="detail">
+            <span class="post-count"><i class="fas fa-calendar"></i> 2016-05-14 &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span class="post-count">       
+                <i class="fas fa-folder-open"></i>  
+                <span class="post-category">
+                    
+                    <a href="/algorithm/">algorithm</a>
+                    
+                </span>
+                
+            </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+        </div>
+        </div>
+
+        <blockquote>
+<p>本系列文章主要介绍常用的算法和数据结构的知识，记录的是《Algorithms I/II》课程的内容，采用的是“算法（第4版）”这本红宝书作为学习教材的，语言是java。这本书的名气我不用多说吧？豆瓣评分9.4，我自己也认为是极好的学习算法的书籍。<br>通过这系列文章，可以加深对数据结构和基本算法的理解（个人认为比学校讲的清晰多了），并加深对java的理解。</p>
+</blockquote>
+<p>之前，我们介绍了<a href="./st1.md">符号表</a>的概念这里主要介绍一下符号表可能的初等实现，并分析他们的不足，然后引出有序符号表的概念，为下篇<a href="./st3.md">二叉查找树</a>做铺垫。</p>
+<h1 id="无序链表"><a href="#无序链表" class="headerlink" title="无序链表"></a><strong>无序链表</strong></h1><p>这应该是最简单的实现方案了，我们只用一个无序链表就可以实现符号表了</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-064750.jpg"> <img src="http://img.hksite.cn/2019-03-01-064750.jpg" alt=""> </a></p>
+<p>我们可以分析出这个算法的性能：</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-64751.jpg"> <img src="http://img.hksite.cn/2019-03-01-64751.jpg" alt=""> </a></p>
+<p>可以看出，性能很差。</p>
+<h1 id="有序数组"><a href="#有序数组" class="headerlink" title="有序数组"></a><strong>有序数组</strong></h1><p>我们还可以用两个有序数组来实现ST（一个Key数组，一个Value数组，相互对应），如果数组有序，那么我们可以考虑用二分查找提高查找效率。这样查找复杂度可以提高到logN</p>
+<p>但是有序数组带来一个问题，插入比较麻烦，插入的时候需要移动交换多次到正确的地方。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-064810.jpg"> <img src="http://img.hksite.cn/2019-03-01-064810.jpg" alt=""> </a></p>
+<p>我们可以看出，用有序数组的话，插入效率并没提升很多，但是查找效率可以提高到logN。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-064901.jpg"> <img src="http://img.hksite.cn/2019-03-01-064901.jpg" alt=""> </a></p>
+<h1 id="有序符号表"><a href="#有序符号表" class="headerlink" title="有序符号表"></a><strong>有序符号表</strong></h1><blockquote>
+<p>上面提到了可以用有序数组实现符号表提高查找效率，以后会有算法能提高插入效率。这里我们先引入一个新的概念：有序符号表。</p>
+</blockquote>
+<p>其实也很好理解，就是符号表有序。那有序的符号表有什么特殊的呢？最大的不一样就是实现了一些有序操作。</p>
+<p>除了之前说的那些API外，还实现了很多有序操作：</p>
+<p>| <strong>函数</strong>                 | <strong>功能</strong>                   |<br>|  | – |<br>| <strong>Key floor(Key key)</strong>   | 小于key的最大键            |<br>| <strong>Key ceiling(Key key)</strong> | 大于key的最小键            |<br>| <strong>int rank(Key key)</strong>    | key的排名（小于key的个数） |<br>| <strong>Key select(int k)</strong>    | 返回rank为k的键            |<br>| <strong>Key min()</strong>            | 返回最小的键               |<br>| <strong>Key max()</strong>            | 返回最大的键               |<br>| <strong>void deleteMin()</strong>     | 删除最小值                 |<br>| <strong>void deleteMax()</strong>     | 删除最大值                 |</p>
+<p>我们看看如果使用上面两种初等实现有序符号表的功能，性能怎么样。可以看出二分查找效率还是高很多，现在我们想想如何提高插入和删除效率？这就是下面我们要提出的<a href="./ST-3-3825c76e-c6da-4f40-a2ba-c089b1d1640b.md">二叉查找树</a></p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-064837.jpg"> <img src="http://img.hksite.cn/2019-03-01-064837.jpg" alt=""> </a></p>
+
+      </div>
+    </div>
+    <div class="card">
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/algorithm/red-black-tree/">
+        <i class="far icon-left"></i>
+        <span class="prev-text nav-default">平衡查找树(2)——红黑树（附动画）</span>
+      </a>
+    
+    
+      <a class="next" href="/algorithm/st1/">
+        <span class="next-text nav-default">符号表ST（1）——基本介绍</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner">
+      
+<div class="copyright">
+  Copyright
+  
+  &copy;
+  
+  <span itemprop="copyrightYear">2019</span>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hawkeye(黄锴)</span>
+  <div class='host'>
+    博客托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 
+  </div>
+  <div class="power">
+    由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+    |
+    主题 - <a href="https://github.com/hk029/hexo-theme-airy/" target="_blank">airy</a>
+  </div>
+</div>
+
+    </div>
+
+    
+    
+    
+    <script src="/lib/prism/prism.js"></script>
+    
+    <script src="/lib/jquery/jquery.min.js"></script>
+    
+    <script src="/lib/fancybox/fancybox.min.js"></script>
+    
+    <script src="/js/airy.js"></script>
+    
+    
+
+    
+    
+    
+    <script src="/js/scrollspy.js"></script>
+    
+    
+</body>
+
+</html>

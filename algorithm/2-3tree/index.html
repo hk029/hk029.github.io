@@ -1,0 +1,358 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8"/>
+<title>平衡查找树（1）—— 2-3查找树（附动画） [ HK ' Site ]</title>
+
+  
+  
+    <link rel="stylesheet" href="/css/airy.css">
+  
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+  
+    <link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+  
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="平衡查找树（1）—— 2-3查找树（附动画）"/>
+
+
+
+
+  <meta name="keywords" content="前端, html, css, javascript" />
+
+
+
+
+
+
+
+<script>
+    window.config = {"title":"HK ' Site","subtitle":"一个程序猿的理想国度","description":null,"author":"hawkeye(黄锴)","language":"zh-cn","timezone":null,"url":"http://hksite.cn","root":"/","permalink":":title/","permalink_defaults":"post/","source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"/","code_dir":"downloads/code","i18n_dir":":lang","skip_render":[],"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":false,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"airy","deploy":{"type":"git","repo":"https://github.com/hk029/hksite.git","branch":"master"},"ignore":[],"keywords":"前端, html, css, javascript","auto_category":{"enable":false,"depth":1},"about_dir":"about","index_generator":{"per_page":20,"order_by":"-date","path":""},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"Home":{"url":"/","icon":"fas fa-home"},"About":{"url":"/about","icon":"fas fa-user-astronaut"},"Archives":{"url":"/archives","icon":"fas fa-tags"},"Categories":{"url":"/categories","icon":"fas fa-archive"},"Tags":{"url":"/tags","icon":"fas fa-tags"}},"favicon":"/favicon.ico","stylesheets":["/css/airy.css","/lib/font-awesome/css/all.min.css","/lib/prism/prism.css","/lib/fancybox/fancybox.min.css","/lib/iconfont/iconfont.css"],"custom_logo":{"enabled":false,"image":"/images/voidsky.png"},"scripts":["/lib/prism/prism.js","/lib/jquery/jquery.min.js","/lib/fancybox/fancybox.min.js","/js/airy.js"],"postjs":["/js/scrollspy.js"],"categories":{"english":{"img":"/images/avatar.jpg","intro":"我的英语之路"}},"leancloud":false,"toc":true,"profile":{"photo":{"url":"https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg","round":true},"introduce":"我是要成为海贼王的男人"},"social":{"github":{"icon":"fab fa-github","enable":true,"url":"http://github.com/hk029"},"weixin":{"qrcode":true,"icon":"fab fa-weixin","enable":true,"url":"/images/weixin.jpg"},"weibo":{"icon":"fab fa-weibo","enable":true,"url":"/"},"juejin":{"icon":"iconfont icon-juejin","enable":true,"url":null},"csdn":{"icon":"iconfont icon-logo_csdn","enable":true,"url":null},"jianshu":{"icon":"iconfont icon-jianshu","enable":true,"url":null}}};
+</script>
+</head>
+
+<body>
+  <div class="header-bkg"></div>
+  <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="inner">
+
+
+<div class="site-brand-wrapper">
+    <div class="site-meta">
+        <div class="custom-logo-site-title">
+            
+            <a href="/" class="brand" rel="start">
+                <span class="site-title">HK ' Site</span>
+            </a>
+            
+        </div>
+        
+        
+        <p class="site-subtitle">一个程序猿的理想国度</p>
+        
+        
+    </div>
+    <div clas="nav-menu">
+        <div class="menu-inner">
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-home"></i>
+                
+                
+                <a href="/">首页</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-user-astronaut"></i>
+                
+                
+                <a href="/about">关于</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/archives">归档</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-archive"></i>
+                
+                
+                <div class="category-menu" href="">
+                分类
+                    <div class="category-panel">
+                    <div class="triangle"></div>
+                    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a></li></ul>
+                    </div>
+                </div>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/tags">标签</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</div></div>
+  </header>
+  </div>
+  <div class="content-outer">
+    <div class="inner flex-container">
+      
+
+
+
+
+
+<ul class="breadcrumb">
+  <i class="fas fa-home"></i>
+  <li><a href="/">首页</a></li>
+  
+    
+    
+    
+      
+      <li><a href="/algorithm/">/algorithm</a></li>
+        
+        
+        
+      
+    
+  
+  
+    
+    
+    
+      
+      <li>/2-3tree</li>
+      
+    
+  
+  
+    
+    
+    
+      
+    
+  
+  
+</ul>
+
+
+      
+      
+<article class="post">
+  <div class="right">
+    <div class="card post-toc">
+    <h1 class="title">文章目录</h1>
+    <div>
+
+        
+        
+        
+
+        
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#2-3树介绍"><span class="nav-text">2-3树介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-3树查找"><span class="nav-text">2-3树查找</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-3树的插入"><span class="nav-text">2-3树的插入</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#构造动画"><span class="nav-text">构造动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实现方案"><span class="nav-text">实现方案</span></a></li></ol></div>
+            
+
+    </div>
+</div>
+  </div>
+  <div class="left">
+    <div class="card">
+      <div class="entry" data-scroll>
+      <div class="post-head">
+        <h1>
+          平衡查找树（1）—— 2-3查找树（附动画）
+        </h1>
+        <div class="detail">
+            <span class="post-count"><i class="fas fa-calendar"></i> 2016-05-25 &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span class="post-count">       
+                <i class="fas fa-folder-open"></i>  
+                <span class="post-category">
+                    
+                    <a href="/algorithm/">algorithm</a>
+                    
+                </span>
+                
+            </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+        </div>
+        </div>
+
+        <blockquote>
+<p>本系列文章主要介绍常用的算法和数据结构的知识，记录的是《Algorithms I/II》课程的内容，采用的是“算法（第4版）”这本红宝书作为学习教材的，语言是java。这本书的名气我不用多说吧？豆瓣评分9.4，我自己也认为是极好的学习算法的书籍。 通过这系列文章，可以加深对数据结构和基本算法的理解（个人认为比学校讲的清晰多了），并加深对java的理解。</p>
+</blockquote>
+<hr>
+<h1 id="2-3树介绍"><a href="#2-3树介绍" class="headerlink" title="2-3树介绍"></a>2-3树介绍</h1><blockquote>
+<p>我们上回说到二叉查找树已经很接近我们的目标了，在很多情况下性能都很不错，但是唯独在删除上不行，一旦删除操作做多了就会失去平衡，那么，这回，我们来说说如何做一个平衡查找树，首先介绍一下2-3查找树</p>
+</blockquote>
+<p>2-3树是一种特殊的二叉树，它允许一个节点中出现2个key。</p>
+<ul>
+<li>2节点：1个key，2个孩子</li>
+<li>3节点，2个key，3个孩子</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464060026525"> <img src="http://img.hksite.cn/1464060026525" alt=""> </a></p>
+<p>它有几个特性：</p>
+<ol>
+<li>符合中序遍历的顺序：左孩小于最左key，中间孩子在左右key之间，右孩子大于最右key</li>
+<li>绝对平衡：从根节点到所有null节点的路径一样长（我们后面会讲如何维护）</li>
+</ol>
+<h1 id="2-3树查找"><a href="#2-3树查找" class="headerlink" title="2-3树查找"></a>2-3树查找</h1><p>根据它的特性，我们可以很容易知道如何查找，和二叉树的查找差不多，只是多了一个节点。</p>
+<ul>
+<li>如果小于左孩子：go left</li>
+<li>如果小于右孩子：go mid</li>
+<li>如果大于右孩子：go right</li>
+<li>如果等于key，返回value</li>
+<li>如果为null，返回null</li>
+</ul>
+<p>看动画：</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464061120949"> <img src="http://img.hksite.cn/1464061120949" alt=""> </a></p>
+<h1 id="2-3树的插入"><a href="#2-3树的插入" class="headerlink" title="2-3树的插入"></a>2-3树的插入</h1><p>插入分几种情况：</p>
+<ul>
+<li>如果插入的节点是一个2-节点：直接把2节点变成3节点</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464061523618"> <img src="http://img.hksite.cn/1464061523618" alt=""> </a></p>
+<ul>
+<li>如果插入的是一个3-节点：<ul>
+<li>把key加入3-节点变成一个临时4-节点</li>
+<li>把4节点的中间key上移到父亲节点</li>
+<li>重复操作。</li>
+<li>如果到达了root，形成了一个临时4节点，则root节点分裂成3个节点，树高增加1层</li>
+</ul>
+</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464061806411"> <img src="http://img.hksite.cn/1464061806411" alt=""> </a></p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464083473454"> <img src="http://img.hksite.cn/1464083473454" alt=""> </a></p>
+<p>看动画：</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464061420156"> <img src="http://img.hksite.cn/1464061420156" alt=""> </a></p>
+<h1 id="构造动画"><a href="#构造动画" class="headerlink" title="构造动画"></a>构造动画</h1><p>讲了这么多，我们就来看看如何构造一棵2-3树吧。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464083893653"> <img src="http://img.hksite.cn/1464083893653" alt=""> </a></p>
+<h1 id="实现方案"><a href="#实现方案" class="headerlink" title="实现方案"></a>实现方案</h1><p>这里就先卖个关子，这里不写代码实现，大家先了解下，后面会用红黑树的方案实现2-3树</p>
+
+      </div>
+    </div>
+    <div class="card">
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/数据库/mongoDB/mongodb-quick-start/">
+        <i class="far icon-left"></i>
+        <span class="prev-text nav-default">Mongodb简单上手</span>
+      </a>
+    
+    
+      <a class="next" href="/algorithm/red-black-tree/">
+        <span class="next-text nav-default">平衡查找树(2)——红黑树（附动画）</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner">
+      
+<div class="copyright">
+  Copyright
+  
+  &copy;
+  
+  <span itemprop="copyrightYear">2019</span>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hawkeye(黄锴)</span>
+  <div class='host'>
+    博客托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 
+  </div>
+  <div class="power">
+    由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+    |
+    主题 - <a href="https://github.com/hk029/hexo-theme-airy/" target="_blank">airy</a>
+  </div>
+</div>
+
+    </div>
+
+    
+    
+    
+    <script src="/lib/prism/prism.js"></script>
+    
+    <script src="/lib/jquery/jquery.min.js"></script>
+    
+    <script src="/lib/fancybox/fancybox.min.js"></script>
+    
+    <script src="/js/airy.js"></script>
+    
+    
+
+    
+    
+    
+    <script src="/js/scrollspy.js"></script>
+    
+    
+</body>
+
+</html>

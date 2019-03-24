@@ -1,0 +1,595 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8"/>
+<title>符号表ST（3）——二叉查找树 （附动画） [ HK ' Site ]</title>
+
+  
+  
+    <link rel="stylesheet" href="/css/airy.css">
+  
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+  
+    <link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+  
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="符号表ST（3）——二叉查找树 （附动画）"/>
+
+
+
+
+  <meta name="keywords" content="前端, html, css, javascript" />
+
+
+
+
+
+
+
+<script>
+    window.config = {"title":"HK ' Site","subtitle":"一个程序猿的理想国度","description":null,"author":"hawkeye(黄锴)","language":"zh-cn","timezone":null,"url":"http://hksite.cn","root":"/","permalink":":title/","permalink_defaults":"post/","source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"/","code_dir":"downloads/code","i18n_dir":":lang","skip_render":[],"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":false,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"airy","deploy":{"type":"git","repo":"https://github.com/hk029/hksite.git","branch":"master"},"ignore":[],"keywords":"前端, html, css, javascript","auto_category":{"enable":false,"depth":1},"about_dir":"about","index_generator":{"per_page":20,"order_by":"-date","path":""},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"Home":{"url":"/","icon":"fas fa-home"},"About":{"url":"/about","icon":"fas fa-user-astronaut"},"Archives":{"url":"/archives","icon":"fas fa-tags"},"Categories":{"url":"/categories","icon":"fas fa-archive"},"Tags":{"url":"/tags","icon":"fas fa-tags"}},"favicon":"/favicon.ico","stylesheets":["/css/airy.css","/lib/font-awesome/css/all.min.css","/lib/prism/prism.css","/lib/fancybox/fancybox.min.css","/lib/iconfont/iconfont.css"],"custom_logo":{"enabled":false,"image":"/images/voidsky.png"},"scripts":["/lib/prism/prism.js","/lib/jquery/jquery.min.js","/lib/fancybox/fancybox.min.js","/js/airy.js"],"postjs":["/js/scrollspy.js"],"categories":{"english":{"img":"/images/avatar.jpg","intro":"我的英语之路"}},"leancloud":false,"toc":true,"profile":{"photo":{"url":"https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg","round":true},"introduce":"我是要成为海贼王的男人"},"social":{"github":{"icon":"fab fa-github","enable":true,"url":"http://github.com/hk029"},"weixin":{"qrcode":true,"icon":"fab fa-weixin","enable":true,"url":"/images/weixin.jpg"},"weibo":{"icon":"fab fa-weibo","enable":true,"url":"/"},"juejin":{"icon":"iconfont icon-juejin","enable":true,"url":null},"csdn":{"icon":"iconfont icon-logo_csdn","enable":true,"url":null},"jianshu":{"icon":"iconfont icon-jianshu","enable":true,"url":null}}};
+</script>
+</head>
+
+<body>
+  <div class="header-bkg"></div>
+  <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="inner">
+
+
+<div class="site-brand-wrapper">
+    <div class="site-meta">
+        <div class="custom-logo-site-title">
+            
+            <a href="/" class="brand" rel="start">
+                <span class="site-title">HK ' Site</span>
+            </a>
+            
+        </div>
+        
+        
+        <p class="site-subtitle">一个程序猿的理想国度</p>
+        
+        
+    </div>
+    <div clas="nav-menu">
+        <div class="menu-inner">
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-home"></i>
+                
+                
+                <a href="/">首页</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-user-astronaut"></i>
+                
+                
+                <a href="/about">关于</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/archives">归档</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-archive"></i>
+                
+                
+                <div class="category-menu" href="">
+                分类
+                    <div class="category-panel">
+                    <div class="triangle"></div>
+                    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a></li></ul>
+                    </div>
+                </div>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/tags">标签</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</div></div>
+  </header>
+  </div>
+  <div class="content-outer">
+    <div class="inner flex-container">
+      
+
+
+
+
+
+<ul class="breadcrumb">
+  <i class="fas fa-home"></i>
+  <li><a href="/">首页</a></li>
+  
+    
+    
+    
+      
+      <li><a href="/algorithm/">/algorithm</a></li>
+        
+        
+        
+      
+    
+  
+  
+    
+    
+    
+      
+      <li>/St3</li>
+      
+    
+  
+  
+    
+    
+    
+      
+    
+  
+  
+</ul>
+
+
+      
+      
+<article class="post">
+  <div class="right">
+    <div class="card post-toc">
+    <h1 class="title">文章目录</h1>
+    <div>
+
+        
+        
+        
+
+        
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-二叉查找树"><span class="nav-text">1 二叉查找树</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-代码框架"><span class="nav-text">1.1 代码框架</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-节点表示"><span class="nav-text">1.2 节点表示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-取得操作"><span class="nav-text">1.3 取得操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-插入操作"><span class="nav-text">1.4 插入操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-动画演示"><span class="nav-text">1.5 动画演示</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-二叉树的形状"><span class="nav-text">1.6 二叉树的形状</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-有序操作"><span class="nav-text">2. 有序操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-最大最小"><span class="nav-text">2.1 最大最小</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-floor和ceiling"><span class="nav-text">2.2 floor和ceiling</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-1-floor操作：（递归操作）"><span class="nav-text">2.2.1 floor操作：（递归操作）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-2-ceiling操作：（递归操作）"><span class="nav-text">2.2.2 ceiling操作：（递归操作）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-3-子树统计"><span class="nav-text">2.3 子树统计</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-4-rank"><span class="nav-text">2.4 rank()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-5-有序遍历"><span class="nav-text">2.5 有序遍历</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-总结"><span class="nav-text">3 总结</span></a></li></ol></div>
+            
+
+    </div>
+</div>
+  </div>
+  <div class="left">
+    <div class="card">
+      <div class="entry" data-scroll>
+      <div class="post-head">
+        <h1>
+          符号表ST（3）——二叉查找树 （附动画）
+        </h1>
+        <div class="detail">
+            <span class="post-count"><i class="fas fa-calendar"></i> 2016-05-14 &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span class="post-count">       
+                <i class="fas fa-folder-open"></i>  
+                <span class="post-category">
+                    
+                    <a href="/algorithm/">algorithm</a>
+                    
+                </span>
+                
+            </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+        </div>
+        </div>
+
+        <blockquote>
+<p>本系列文章主要介绍常用的算法和数据结构的知识，记录的是《Algorithms I/II》课程的内容，采用的是“算法（第4版）”这本红宝书作为学习教材的，语言是java。这本书的名气我不用多说吧？豆瓣评分9.4，我自己也认为是极好的学习算法的书籍。<br>通过这系列文章，可以加深对数据结构和基本算法的理解（个人认为比学校讲的清晰多了），并加深对java的理解。</p>
+</blockquote>
+<h1 id="1-二叉查找树"><a href="#1-二叉查找树" class="headerlink" title="1 二叉查找树"></a><strong>1 二叉查找树</strong></h1><p>二叉查找树是一个对称有序的二叉树 即：</p>
+<blockquote>
+<p>每个节点有key，有2个孩子，左孩子的key小于自己的key，右孩子的key大于自己的key。（和堆不一样）</p>
+</blockquote>
+<p><a data-fancybox="gallery" href="https://raw.githubusercontent.com/hk029/blog/master/算法/符号表（3）/1463215799595.png"> <img src="https://raw.githubusercontent.com/hk029/blog/master/算法/符号表（3）/1463215799595.png" alt=""> </a></p>
+<h2 id="1-1-代码框架"><a href="#1-1-代码框架" class="headerlink" title="1.1 代码框架"></a><strong>1.1 代码框架</strong></h2><p>我们可以根据定义设计出一个如下的二叉查找树基本框架，然后去完善它</p>
+<pre><code class="java">public class BST&lt;Key extends Comparable&lt;Key&gt;, Value&gt;
+{
+    private Node root;
+    private class Node{}
+    public void put(Key key, Value val){} 
+    public Value get(Key key){}
+    public void delete(Key key){}
+    public Iterable&lt;Key&gt; iterator(){}
+}
+</code></pre>
+<h2 id="1-2-节点表示"><a href="#1-2-节点表示" class="headerlink" title="1.2 节点表示"></a><strong>1.2 节点表示</strong></h2><p>作为二叉查找树的节点，它应该包含键-值，还有左右孩子</p>
+<pre><code class="java">private class Node {
+        private Key key;
+        private Value val;
+        private Node left, right;
+        public Node(Key key, Value val) {
+            this.key = key;
+            this.val = val;
+        }
+    }
+</code></pre>
+<h2 id="1-3-取得操作"><a href="#1-3-取得操作" class="headerlink" title="1.3 取得操作"></a><strong>1.3 取得操作</strong></h2><p>根据二叉树的性质，可以从root开始搜索：</p>
+<ul>
+<li>如果 小于 ，左孩子</li>
+<li><p>如果 大于，右孩子</p>
+<ul>
+<li>如果找到，返回</li>
+<li><p>如果为null，则取得失败</p>
+<pre><code class="java">
+public Value get(Key key)
+  {
+      Node x = root;
+      while(x != null)
+      {
+          int cmp = key.compareTo(x.key);           
+          if(cmp &lt; 0)
+              x = x.left;
+          else if(cmp &gt; 0)
+              x = x.right;
+          else if(cmp == 0)
+              return x.val;
+      }
+      return null;
+  }
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="1-4-插入操作"><a href="#1-4-插入操作" class="headerlink" title="1.4 插入操作"></a><strong>1.4 插入操作</strong></h2><blockquote>
+<p>插入操作可以用递归来做。（凡是涉及链表的插入操作，都可以考虑用递归，用非递归相对来说麻烦点，因为插入操作是在父亲节点上插入一个左右孩子，如果root为空还得单独判断）</p>
+</blockquote>
+<p>不断的递归搜索左右孩子，直到找到一个null节点，就把新&lt;键，值&gt;插入。如果键本身在树中，则更新值。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065155.png"> <img src="http://img.hksite.cn/2019-03-01-065155.png" alt=""> </a></p>
+<p>这里比较巧妙的是：</p>
+<p><code>root = put(root, key, val)</code></p>
+<p>; 把root也结合进去了。</p>
+<pre><code class="java">public void put(Key key, Value val) {
+        root = put(root, key, val);
+    }
+
+    private Node put(Node x, Key key, Value val) {
+        if (x == null) {
+            return new Node(key, val);
+        }
+        int cmp = key.compareTo(x.key);
+        if (cmp &lt; 0) {
+            x.left = put(x.left, key, val);
+        } else if (cmp &gt; 0) {
+            x.right = put(x.right, key, val);
+        } else if (cmp == 0) {
+            x.val = val;
+        }
+        return x;
+    }
+</code></pre>
+<p>也可以使用非递归的代码：</p>
+<pre><code class="java">public void put(Key key,Value val)
+    {
+        Node x = root;
+        if(x == null)
+            x = new Node(key,val); 
+        while(true)
+        {
+            int cmp = key.compareTo(x.key);
+            if(cmp &lt; 0)
+            {
+                if(x.left != null)
+                    x = x.left;
+                x.left = new Node(key,val); 
+                return ;
+            }
+            if(cmp &gt; 0)
+            {
+                if(x.right != null)
+                    x = x.right;
+                x.right = new Node(key,val); 
+                return ;
+            }
+            if(cmp == 0){
+                x.val = val;
+                return ;
+            }
+        }
+    }
+</code></pre>
+<h2 id="1-5-动画演示"><a href="#1-5-动画演示" class="headerlink" title="1.5 动画演示"></a><strong>1.5 动画演示</strong></h2><p>动画演示查找和插入</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-20160514170716383.gif"> <img src="http://img.hksite.cn/2019-03-01-20160514170716383.gif" alt=""> </a></p>
+<h2 id="1-6-二叉树的形状"><a href="#1-6-二叉树的形状" class="headerlink" title="1.6 二叉树的形状"></a><strong>1.6 二叉树的形状</strong></h2><p>根据不同的插入顺序，二叉树会呈现出不同的形状，最好的状态当然是完全平衡的状态，这个时候搜索效率最高，最坏的形式就是插入的序列有序，这个时候二叉树的搜索效率就是N了。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065311.png"> <img src="http://img.hksite.cn/2019-03-01-065311.png" alt=""> </a></p>
+<p>我们看看随机插入的效果：</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065315.gif"> <img src="http://img.hksite.cn/2019-03-01-065315.gif" alt=""> </a></p>
+<p>研究表明，二叉树的平均深度都不深，如果插入是随机的情况下。所以通常情况下，二叉树的效率还是很高的。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065320.png"> <img src="http://img.hksite.cn/2019-03-01-065320.png" alt=""> </a></p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065324.png"> <img src="http://img.hksite.cn/2019-03-01-065324.png" alt=""> </a></p>
+<h1 id="2-有序操作"><a href="#2-有序操作" class="headerlink" title="2. 有序操作"></a><strong>2. 有序操作</strong></h1><h2 id="2-1-最大最小"><a href="#2-1-最大最小" class="headerlink" title="2.1 最大最小"></a><strong>2.1 最大最小</strong></h2><p>这个很简单，最大的话直接搜索到最右的孩子 最小的话直接搜索到最左的孩子</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065329.png"> <img src="http://img.hksite.cn/2019-03-01-065329.png" alt=""> </a></p>
+<h2 id="2-2-floor和ceiling"><a href="#2-2-floor和ceiling" class="headerlink" title="2.2 floor和ceiling"></a><strong>2.2 floor和ceiling</strong></h2><blockquote>
+<p>floor：找到比key小的最大key ceiling：找到比key大的最小key</p>
+</blockquote>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065334.png"> <img src="http://img.hksite.cn/2019-03-01-065334.png" alt=""> </a></p>
+<h2 id="2-2-1-floor操作：（递归操作）"><a href="#2-2-1-floor操作：（递归操作）" class="headerlink" title="2.2.1 floor操作：（递归操作）"></a><strong>2.2.1 floor操作：（递归操作）</strong></h2><p>由于floor操作是找比key小的最大key，这个概念看起来特别绕，所以必须要理清楚。 </p>
+<ul>
+<li><strong>条件一：</strong>首先前提条件是比给定的Key<code>小</code></li>
+<li><strong>条件二：</strong>然后再在这些<code>小</code>值中找<code>最大</code>的一个。</li>
+</ul>
+<p>我们先考虑如果给定你一个节点，如何找它的floor值？？很明显，它的<code>左子树</code>（条件1）的<code>最右节点</code>（条件2），所以下面的思路也是这样的，先满足条件1，再满足条件2.</p>
+<ul>
+<li>如果k == <code>root.key</code> <code>floor</code> = <code>root.key</code></li>
+<li><p>如果k &lt; <code>root.key</code>在<code>左子树</code>继续查找（杂没比我小的）</p>
+<ul>
+<li><p>如果k &gt; <code>root.key</code> 记录<code>root</code>（终于找到一个比我小的了，赶紧记下来）</p>
+<ul>
+<li>如果<code>右边子树</code>遇到一个<code>小于</code>k的，就继续（看还有么有更大的<code>小</code>值）</li>
+<li>否则，就是<code>root</code> （看来没有比你大的了）<br><code>`</code>java</li>
+</ul>
+<p>public Key floor(Key key)<br>  {</p>
+<pre><code>  Node x = floor(root,key);
+  if(x == null) return null;
+  return x.key;
+</code></pre><p>  }<br>  private Node floor(Node x,Key key)<br>  {</p>
+<pre><code>  if(x == null)   return x;
+  int cmp = key.compareTo(x.key);
+  if (cmp &lt; 0)   return floor(x.left, key);
+  if (cmp == 0)   return x;
+  Node f = floor(x.right, key);
+  if (f == null)  
+      return x;
+  else 
+      return f;
+</code></pre><p>  }<br><code>`</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065434.png"> <img src="http://img.hksite.cn/2019-03-01-065434.png" alt=""> </a></p>
+<h2 id="2-2-2-ceiling操作：（递归操作）"><a href="#2-2-2-ceiling操作：（递归操作）" class="headerlink" title="2.2.2 ceiling操作：（递归操作）"></a><strong>2.2.2 ceiling操作：（递归操作）</strong></h2><p>和floor操作相反</p>
+<ul>
+<li>如果k == <code>root.key</code> <code>floor</code> = <code>root.key</code></li>
+<li><p>如果k &gt; <code>root.key</code>在<code>右子树</code>继续查找（杂没比我大的?）</p>
+<ul>
+<li><p>如果k &lt; <code>root.key</code> 记录<code>root</code>（终于找到一个比我大的了，赶紧记下来）</p>
+<ul>
+<li>如果<code>左边子树</code>遇到一个<code>大于</code>k的，就继续（看还有么有更小的<code>大</code>值）</li>
+<li>否则，就是<code>root</code>（看来没有比你小的了）<br><code>`</code>java</li>
+</ul>
+<p>public Key ceil(Key key) {</p>
+<pre><code>  Node x = ceil(root, key);
+  if (x == null) {
+      return null;
+  }
+  return x.key;
+</code></pre><p>  }</p>
+<p>  private Node ceil(Node x, Key key) {</p>
+<pre><code>  if (x == null) {
+      return x;
+  }
+  int cmp = key.compareTo(x.key);
+  if (cmp &gt; 0) {
+      return ceil(x.right, key);
+  }
+  if (cmp == 0) {
+      return x;
+  }
+  Node f = ceil(x.left, key);
+  if (f == null) {
+      return x;
+  } else {
+      return f;
+  }
+</code></pre><p>  }<br><code>`</code></p>
+</li>
+</ul>
+</li>
+</ul>
+<h2 id="2-3-子树统计"><a href="#2-3-子树统计" class="headerlink" title="2.3 子树统计"></a><strong>2.3 子树统计</strong></h2><p>子树统计有很多应用的地方，我们经常需要查找比key小的有多少个，或者找第几大的元素，比如<code>rank()</code>操作，<code>select()</code>操作。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065501.png"> <img src="http://img.hksite.cn/2019-03-01-065501.png" alt=""> </a></p>
+<p>首先，我们需要在Node类中加入一个用来统计的变量count。并且修改size()和put函数，使得树在建立的时候，就使得count填充好。</p>
+<pre><code class="java">private class Node
+{
+   private Key key;
+   private Value val;
+   private Node left;
+   private Node right;
+   private int count;  //加这里
+}
+
+public int size()
+  {  
+      return size(root);  
+  }
+  private int size(Node x)
+  {
+     if (x == null) return 0;
+     return x.count;  //加这里
+  }
+
+private Node put(Node x, Key key, Value val)
+ {
+    if (x == null) return new Node(key, val, 1);
+    int cmp = key.compareTo(x.key);
+    if (cmp  &lt; 0) x.left  = put(x.left,  key, val);
+    else if (cmp  &gt; 0) x.right = put(x.right, key, val);
+    else if (cmp == 0) x.val = val;
+    x.count = 1 + size(x.left) + size(x.right);//加这里
+    return x;
+ }
+</code></pre>
+<h2 id="2-4-rank"><a href="#2-4-rank" class="headerlink" title="2.4 rank()"></a><strong>2.4 rank()</strong></h2><p>rank的功能就是返回键小于key的个数。有三种情况：</p>
+<ul>
+<li>root == key 左孩子<code>count</code>（因为只有左孩子小于它）</li>
+<li>root &lt; key 左孩子<code>count</code>+1（自己）+ 右孩子继续找</li>
+<li>root &gt; key 左孩子继续找（给定key还没找到比自己小的呢）</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065510.png"> <img src="http://img.hksite.cn/2019-03-01-065510.png" alt=""> </a></p>
+<p>比如这个图中： rank(S) = 6 rank(A) = 0 (左孩子为null) rank(D) = 0+1+0+1 = 2 （1是A和C自己，0是A和C的左孩子）</p>
+<pre><code class="java">public int rank(Key key)
+    {
+        return rank(root,key);
+    }
+    private int rank(Node x,Key key)
+    {
+        if(x == null) return 0;
+        int cmp = key.compareTo(x.key);
+        if(cmp &gt; 0)
+            return 1 + size(x.left) + rank(x.right,key);
+        else if(cmp == 0)
+            return size(x.right);
+        return rank(x.left,key);
+    }
+</code></pre>
+<h2 id="2-5-有序遍历"><a href="#2-5-有序遍历" class="headerlink" title="2.5 有序遍历"></a><strong>2.5 有序遍历</strong></h2><p>根据二叉树的结构，很简单了：</p>
+<ul>
+<li>遍历左孩子</li>
+<li>把自己key插入队列</li>
+<li><p>遍历右孩子</p>
+<pre><code class="java">
+  public Iterable&lt;Key&gt; keys()
+  ​    {
+  ​        Queue&lt;Key&gt; q = new Queue&lt;Key&gt;();
+  ​        inorder(root, q);
+  ​        return q;
+  ​    }
+  ​    private void inorder(Node x,Queue&lt;Key&gt; q)
+  ​    {
+  ​        if(x == null)
+  ​            return ;
+  ​        inorder(x.left, q);
+  ​        q.enqueue(x.key);
+  ​        inorder(x.right,q);
+  ​    }
+</code></pre>
+</li>
+</ul>
+<h1 id="3-总结"><a href="#3-总结" class="headerlink" title="3 总结"></a><strong>3 总结</strong></h1><p>用二叉排序树实现的符号表操作，其时间复杂度要大大小于其他方式。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-065514.png"> <img src="http://img.hksite.cn/2019-03-01-065514.png" alt=""> </a></p>
+<p>细心的小伙伴可能发现了，我们并没有讲删除操作，因为删除操作涉及的东西比较多，我们在后面单独讲它。</p>
+
+      </div>
+    </div>
+    <div class="card">
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/algorithm/st4/">
+        <i class="far icon-left"></i>
+        <span class="prev-text nav-default">符号表ST（4）——二叉查找树删除 （附动画）</span>
+      </a>
+    
+    
+      <a class="next" href="/algorithm/sort1/">
+        <span class="next-text nav-default">sort1</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner">
+      
+<div class="copyright">
+  Copyright
+  
+  &copy;
+  
+  <span itemprop="copyrightYear">2019</span>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hawkeye(黄锴)</span>
+  <div class='host'>
+    博客托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 
+  </div>
+  <div class="power">
+    由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+    |
+    主题 - <a href="https://github.com/hk029/hexo-theme-airy/" target="_blank">airy</a>
+  </div>
+</div>
+
+    </div>
+
+    
+    
+    
+    <script src="/lib/prism/prism.js"></script>
+    
+    <script src="/lib/jquery/jquery.min.js"></script>
+    
+    <script src="/lib/fancybox/fancybox.min.js"></script>
+    
+    <script src="/js/airy.js"></script>
+    
+    
+
+    
+    
+    
+    <script src="/js/scrollspy.js"></script>
+    
+    
+</body>
+
+</html>

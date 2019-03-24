@@ -1,0 +1,873 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8"/>
+<title>一个程序猿的理想国度 [ HK ' Site ]</title>
+
+  
+  
+    <link rel="stylesheet" href="/css/airy.css">
+  
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+  
+    <link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+  
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+
+
+
+  <meta name="keywords" content="前端, html, css, javascript" />
+
+
+
+
+
+
+
+<script>
+    window.config = {"title":"HK ' Site","subtitle":"一个程序猿的理想国度","description":null,"author":"hawkeye(黄锴)","language":"zh-cn","timezone":null,"url":"http://hksite.cn","root":"/","permalink":":title/","permalink_defaults":"post/","source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"/","code_dir":"downloads/code","i18n_dir":":lang","skip_render":[],"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":false,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"airy","deploy":{"type":"git","repo":"https://github.com/hk029/hksite.git","branch":"master"},"ignore":[],"keywords":"前端, html, css, javascript","auto_category":{"enable":false,"depth":1},"about_dir":"about","index_generator":{"per_page":20,"order_by":"-date","path":""},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"Home":{"url":"/","icon":"fas fa-home"},"About":{"url":"/about","icon":"fas fa-user-astronaut"},"Archives":{"url":"/archives","icon":"fas fa-tags"},"Categories":{"url":"/categories","icon":"fas fa-archive"},"Tags":{"url":"/tags","icon":"fas fa-tags"}},"favicon":"/favicon.ico","stylesheets":["/css/airy.css","/lib/font-awesome/css/all.min.css","/lib/prism/prism.css","/lib/fancybox/fancybox.min.css","/lib/iconfont/iconfont.css"],"custom_logo":{"enabled":false,"image":"/images/voidsky.png"},"scripts":["/lib/prism/prism.js","/lib/jquery/jquery.min.js","/lib/fancybox/fancybox.min.js","/js/airy.js"],"postjs":["/js/scrollspy.js"],"categories":{"english":{"img":"/images/avatar.jpg","intro":"我的英语之路"}},"leancloud":false,"toc":true,"profile":{"photo":{"url":"https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg","round":true},"introduce":"我是要成为海贼王的男人"},"social":{"github":{"icon":"fab fa-github","enable":true,"url":"http://github.com/hk029"},"weixin":{"qrcode":true,"icon":"fab fa-weixin","enable":true,"url":"/images/weixin.jpg"},"weibo":{"icon":"fab fa-weibo","enable":true,"url":"/"},"juejin":{"icon":"iconfont icon-juejin","enable":true,"url":null},"csdn":{"icon":"iconfont icon-logo_csdn","enable":true,"url":null},"jianshu":{"icon":"iconfont icon-jianshu","enable":true,"url":null}}};
+</script>
+</head>
+
+<body>
+  <div class="header-bkg"></div>
+  <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="inner">
+
+
+<div class="site-brand-wrapper">
+    <div class="site-meta">
+        <div class="custom-logo-site-title">
+            
+            <a href="/" class="brand" rel="start">
+                <span class="site-title">HK ' Site</span>
+            </a>
+            
+        </div>
+        
+        
+        <p class="site-subtitle">一个程序猿的理想国度</p>
+        
+        
+    </div>
+    <div clas="nav-menu">
+        <div class="menu-inner">
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-home"></i>
+                
+                
+                <a href="/">首页</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-user-astronaut"></i>
+                
+                
+                <a href="/about">关于</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/archives">归档</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-archive"></i>
+                
+                
+                <div class="category-menu" href="">
+                分类
+                    <div class="category-panel">
+                    <div class="triangle"></div>
+                    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a></li></ul>
+                    </div>
+                </div>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/tags">标签</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</div></div>
+  </header>
+  </div>
+  <div class="content-outer">
+    <div class="inner flex-container">
+      
+
+
+      
+      
+<div class="right">
+  
+
+
+
+
+
+<div class="profile card">
+    <div class="intro-box">
+        <h1 class="title"><i class="fas fa-user-astronaut"></i>&nbsp 个人介绍</h1>
+        <div class="avatar  round ">
+         <img src="https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg" alt="">
+        </div>
+        <div class="introduce">
+        <div>            我是要成为海贼王的男人</div>
+        </div>
+        <div class="author">hawkeye(黄锴)</div>
+        <div class="social flex-box">
+            
+            
+            <div class="social-item flex">
+                
+                <a href="http://github.com/hk029" target="_blank">
+                <i class="fab fa-github"></i>
+                </a>
+                
+            </div>
+            
+            
+            
+            <div class="social-item flex">
+                
+                <a data-fancybox="gallery" href="/images/weixin.jpg">
+                <i class="fab fa-weixin"></i>
+                </a>
+                <!-- <div class="qrcode">
+                </div> -->
+                
+            </div>
+            
+            
+            
+            <div class="social-item flex">
+                
+                <a href="/" target="_blank">
+                <i class="fab fa-weibo"></i>
+                </a>
+                
+            </div>
+            
+            
+            
+            <div class="social-item flex">
+                
+                <a href="" target="_blank">
+                <i class="iconfont icon-juejin"></i>
+                </a>
+                
+            </div>
+            
+            
+            
+            <div class="social-item flex">
+                
+                <a href="" target="_blank">
+                <i class="iconfont icon-logo_csdn"></i>
+                </a>
+                
+            </div>
+            
+            
+            
+            <div class="social-item flex">
+                
+                <a href="" target="_blank">
+                <i class="iconfont icon-jianshu"></i>
+                </a>
+                
+            </div>
+            
+            
+        </div>
+    </div>
+</div>
+  
+<div class="profile card">
+    <div class="intro-box">
+        <h1 class="title"><i class="fas fa-tags"></i>分类</h1>
+        
+        <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a><span class="category-list-count">16</span></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/数据库/mongoDB/">mongoDB</a><span class="category-list-count">1</span></li></ul></li></ul>
+        
+    </div>
+</div>
+  
+<div class="profile card">
+    <div class="intro-box">
+        <h1 class="title"><i class="fas fa-tags"></i>标签</h1>
+        
+        <a href="/tags/mongoDB/" style="font-size: 10px; color: #ddd">mongoDB</a> <a href="/tags/《常用算法和数据结构》/" style="font-size: 22px; color: #85ccb4">《常用算法和数据结构》</a>
+        
+    </div>
+</div>
+  <div class="profile card">
+    <div class="intro-box">
+        <h1 class="title">最近文章</h1>
+        <div class="recent-posts">
+                <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/README/">README</a></li><li class="post-list-item"><a class="post-list-link" href="/algorithm/README/">README</a></li><li class="post-list-item"><a class="post-list-link" href="/数据库/mongoDB/mongodb-quick-start/">Mongodb简单上手</a></li><li class="post-list-item"><a class="post-list-link" href="/algorithm/2-3tree/">平衡查找树（1）—— 2-3查找树（附动画）</a></li><li class="post-list-item"><a class="post-list-link" href="/algorithm/red-black-tree/">平衡查找树(2)——红黑树（附动画）</a></li><li class="post-list-item"><a class="post-list-link" href="/algorithm/st2/">符号表ST（2）—— 初等实现分析和有序符号表</a></li><li class="post-list-item"><a class="post-list-link" href="/algorithm/st1/">符号表ST（1）——基本介绍</a></li><li class="post-list-item"><a class="post-list-link" href="/algorithm/st4/">符号表ST（4）——二叉查找树删除 （附动画）</a></li><li class="post-list-item"><a class="post-list-link" href="/algorithm/st3/">符号表ST（3）——二叉查找树 （附动画）</a></li><li class="post-list-item"><a class="post-list-link" href="/algorithm/sort1/">sort1</a></li></ul>
+        </div>
+    </div>
+</div>
+</div>
+<div class="left">
+  
+
+  <div class="post-list card nopadding">
+    
+    <a href="/README/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2019-03-23T16:00:00.000Z">
+        2019-03-24
+    </time>
+    
+</div>
+<h1 class="post-title">README</h1>
+<div class="more-info">
+   
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/README/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2019-03-23T16:00:00.000Z">
+        2019-03-24
+    </time>
+    
+</div>
+<h1 class="post-title">README</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/数据库/mongoDB/mongodb-quick-start/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-10-13T16:00:00.000Z">
+        2016-10-14
+    </time>
+    
+</div>
+<h1 class="post-title">Mongodb简单上手</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/数据库/">数据库</a>
+        
+        <a href="/数据库/mongoDB/">mongoDB</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/mongoDB/">mongoDB</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/2-3tree/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-24T16:00:00.000Z">
+        2016-05-25
+    </time>
+    
+</div>
+<h1 class="post-title">平衡查找树（1）—— 2-3查找树（附动画）</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/red-black-tree/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-24T16:00:00.000Z">
+        2016-05-25
+    </time>
+    
+</div>
+<h1 class="post-title">平衡查找树(2)——红黑树（附动画）</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/st2/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-13T16:00:00.000Z">
+        2016-05-14
+    </time>
+    
+</div>
+<h1 class="post-title">符号表ST（2）—— 初等实现分析和有序符号表</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/st1/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-13T16:00:00.000Z">
+        2016-05-14
+    </time>
+    
+</div>
+<h1 class="post-title">符号表ST（1）——基本介绍</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/st4/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-13T16:00:00.000Z">
+        2016-05-14
+    </time>
+    
+</div>
+<h1 class="post-title">符号表ST（4）——二叉查找树删除 （附动画）</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/st3/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-13T16:00:00.000Z">
+        2016-05-14
+    </time>
+    
+</div>
+<h1 class="post-title">符号表ST（3）——二叉查找树 （附动画）</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/sort1/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-09T16:00:00.000Z">
+        2016-05-10
+    </time>
+    
+</div>
+<h1 class="post-title">sort1</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/sort2/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-09T16:00:00.000Z">
+        2016-05-10
+    </time>
+    
+</div>
+<h1 class="post-title">元素排序(2)——希尔排序</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/sort3/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-09T16:00:00.000Z">
+        2016-05-10
+    </time>
+    
+</div>
+<h1 class="post-title">元素排序(3)——洗牌算法</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/sort4/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-09T16:00:00.000Z">
+        2016-05-10
+    </time>
+    
+</div>
+<h1 class="post-title">元素排序(4)——凸包问题</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/quicksort/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-09T16:00:00.000Z">
+        2016-05-10
+    </time>
+    
+</div>
+<h1 class="post-title">元素排序(6)——重头戏：快速排序</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/mergesort/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-05-08T16:00:00.000Z">
+        2016-05-09
+    </time>
+    
+</div>
+<h1 class="post-title">元素排序(5)——归并排序</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/bi-heap/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-04-28T16:00:00.000Z">
+        2016-04-29
+    </time>
+    
+</div>
+<h1 class="post-title">优先队列(2)——二叉堆</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/heapsort/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-04-28T16:00:00.000Z">
+        2016-04-29
+    </time>
+    
+</div>
+<h1 class="post-title">优先队列(3)——堆排序</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+    <a href="/algorithm/priority-queue/">
+      <div class="post-item">
+          <div class="time">
+    
+    <time datetime="2016-04-28T16:00:00.000Z">
+        2016-04-29
+    </time>
+    
+</div>
+<h1 class="post-title">优先队列(1)——API和初等实现</h1>
+<div class="more-info">
+    
+    <i class="fas fa-th"></i>
+    <span class="post-category">
+        
+        <a href="/algorithm/">algorithm</a>
+        
+    </span>
+    
+     
+    <i class="fas fa-tags" style="margin-left:10px"></i>
+    <span class="post-tags">
+        
+        <a href="/tags/《常用算法和数据结构》/">《常用算法和数据结构》</a>
+        
+    </span>
+    
+</div>
+      </div>
+    </a>
+    
+  </div>
+
+
+  <div class="card">
+    
+  <nav class="pagination">
+      <span class="page-number current">1</span>
+  </nav>
+
+
+  </div>
+</div>
+
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner">
+      
+<div class="copyright">
+  Copyright
+  
+  &copy;
+  
+  <span itemprop="copyrightYear">2019</span>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hawkeye(黄锴)</span>
+  <div class='host'>
+    博客托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 
+  </div>
+  <div class="power">
+    由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+    |
+    主题 - <a href="https://github.com/hk029/hexo-theme-airy/" target="_blank">airy</a>
+  </div>
+</div>
+
+    </div>
+
+    
+    
+    
+    <script src="/lib/prism/prism.js"></script>
+    
+    <script src="/lib/jquery/jquery.min.js"></script>
+    
+    <script src="/lib/fancybox/fancybox.min.js"></script>
+    
+    <script src="/js/airy.js"></script>
+    
+    
+
+    
+</body>
+
+</html>

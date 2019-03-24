@@ -1,0 +1,457 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8"/>
+<title>平衡查找树(2)——红黑树（附动画） [ HK ' Site ]</title>
+
+  
+  
+    <link rel="stylesheet" href="/css/airy.css">
+  
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+  
+    <link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+  
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="平衡查找树(2)——红黑树（附动画）"/>
+
+
+
+
+  <meta name="keywords" content="前端, html, css, javascript" />
+
+
+
+
+
+
+
+<script>
+    window.config = {"title":"HK ' Site","subtitle":"一个程序猿的理想国度","description":null,"author":"hawkeye(黄锴)","language":"zh-cn","timezone":null,"url":"http://hksite.cn","root":"/","permalink":":title/","permalink_defaults":"post/","source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"/","code_dir":"downloads/code","i18n_dir":":lang","skip_render":[],"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":false,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"airy","deploy":{"type":"git","repo":"https://github.com/hk029/hksite.git","branch":"master"},"ignore":[],"keywords":"前端, html, css, javascript","auto_category":{"enable":false,"depth":1},"about_dir":"about","index_generator":{"per_page":20,"order_by":"-date","path":""},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"Home":{"url":"/","icon":"fas fa-home"},"About":{"url":"/about","icon":"fas fa-user-astronaut"},"Archives":{"url":"/archives","icon":"fas fa-tags"},"Categories":{"url":"/categories","icon":"fas fa-archive"},"Tags":{"url":"/tags","icon":"fas fa-tags"}},"favicon":"/favicon.ico","stylesheets":["/css/airy.css","/lib/font-awesome/css/all.min.css","/lib/prism/prism.css","/lib/fancybox/fancybox.min.css","/lib/iconfont/iconfont.css"],"custom_logo":{"enabled":false,"image":"/images/voidsky.png"},"scripts":["/lib/prism/prism.js","/lib/jquery/jquery.min.js","/lib/fancybox/fancybox.min.js","/js/airy.js"],"postjs":["/js/scrollspy.js"],"categories":{"english":{"img":"/images/avatar.jpg","intro":"我的英语之路"}},"leancloud":false,"toc":true,"profile":{"photo":{"url":"https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg","round":true},"introduce":"我是要成为海贼王的男人"},"social":{"github":{"icon":"fab fa-github","enable":true,"url":"http://github.com/hk029"},"weixin":{"qrcode":true,"icon":"fab fa-weixin","enable":true,"url":"/images/weixin.jpg"},"weibo":{"icon":"fab fa-weibo","enable":true,"url":"/"},"juejin":{"icon":"iconfont icon-juejin","enable":true,"url":null},"csdn":{"icon":"iconfont icon-logo_csdn","enable":true,"url":null},"jianshu":{"icon":"iconfont icon-jianshu","enable":true,"url":null}}};
+</script>
+</head>
+
+<body>
+  <div class="header-bkg"></div>
+  <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="inner">
+
+
+<div class="site-brand-wrapper">
+    <div class="site-meta">
+        <div class="custom-logo-site-title">
+            
+            <a href="/" class="brand" rel="start">
+                <span class="site-title">HK ' Site</span>
+            </a>
+            
+        </div>
+        
+        
+        <p class="site-subtitle">一个程序猿的理想国度</p>
+        
+        
+    </div>
+    <div clas="nav-menu">
+        <div class="menu-inner">
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-home"></i>
+                
+                
+                <a href="/">首页</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-user-astronaut"></i>
+                
+                
+                <a href="/about">关于</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/archives">归档</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-archive"></i>
+                
+                
+                <div class="category-menu" href="">
+                分类
+                    <div class="category-panel">
+                    <div class="triangle"></div>
+                    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a></li></ul>
+                    </div>
+                </div>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/tags">标签</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</div></div>
+  </header>
+  </div>
+  <div class="content-outer">
+    <div class="inner flex-container">
+      
+
+
+
+
+
+<ul class="breadcrumb">
+  <i class="fas fa-home"></i>
+  <li><a href="/">首页</a></li>
+  
+    
+    
+    
+      
+      <li><a href="/algorithm/">/algorithm</a></li>
+        
+        
+        
+      
+    
+  
+  
+    
+    
+    
+      
+      <li>/Red-Black-Tree</li>
+      
+    
+  
+  
+    
+    
+    
+      
+    
+  
+  
+</ul>
+
+
+      
+      
+<article class="post">
+  <div class="right">
+    <div class="card post-toc">
+    <h1 class="title">文章目录</h1>
+    <div>
+
+        
+        
+        
+
+        
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#红黑树介绍"><span class="nav-text">红黑树介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#红黑树表示"><span class="nav-text">红黑树表示</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#红黑树操作"><span class="nav-text">红黑树操作</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#左旋操作"><span class="nav-text">左旋操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#右旋操作"><span class="nav-text">右旋操作</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#颜色翻转"><span class="nav-text">颜色翻转</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入操作"><span class="nav-text">插入操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#插入只有1个节点的树"><span class="nav-text">插入只有1个节点的树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入底部的一个2-节点"><span class="nav-text">插入底部的一个2-节点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入只有2个节点的树"><span class="nav-text">插入只有2个节点的树</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插入底部的一个3-节点"><span class="nav-text">插入底部的一个3-节点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入总结"><span class="nav-text">插入总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#插入代码"><span class="nav-text">插入代码</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#红黑树构造动画"><span class="nav-text">红黑树构造动画</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#红黑树性能分析"><span class="nav-text">红黑树性能分析</span></a></li></ol></div>
+            
+
+    </div>
+</div>
+  </div>
+  <div class="left">
+    <div class="card">
+      <div class="entry" data-scroll>
+      <div class="post-head">
+        <h1>
+          平衡查找树(2)——红黑树（附动画）
+        </h1>
+        <div class="detail">
+            <span class="post-count"><i class="fas fa-calendar"></i> 2016-05-25 &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span class="post-count">       
+                <i class="fas fa-folder-open"></i>  
+                <span class="post-category">
+                    
+                    <a href="/algorithm/">algorithm</a>
+                    
+                </span>
+                
+            </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+        </div>
+        </div>
+
+        <blockquote>
+<p>本系列文章主要介绍常用的算法和数据结构的知识，记录的是《Algorithms I/II》课程的内容，采用的是“算法（第4版）”这本红宝书作为学习教材的，语言是java。这本书的名气我不用多说吧？豆瓣评分9.4，我自己也认为是极好的学习算法的书籍。 通过这系列文章，可以加深对数据结构和基本算法的理解（个人认为比学校讲的清晰多了），并加深对java的理解。</p>
+</blockquote>
+<hr>
+<h1 id="红黑树介绍"><a href="#红黑树介绍" class="headerlink" title="红黑树介绍"></a>红黑树介绍</h1><blockquote>
+<p>红黑树是一种简单的实现2-3树的数据结构，它方便的把我们之前实现的二叉搜索树改造成了一棵2-3树。它的核心思想是用一条左倾链（红链）作为“胶水”把二叉树的两个节点给粘起来，形成一个3节点。</p>
+</blockquote>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084199170"> <img src="http://img.hksite.cn/1464084199170" alt=""> </a></p>
+<p>把红链看成水平的，看是不是和2-3树就一样了</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084302728"> <img src="http://img.hksite.cn/1464084302728" alt=""> </a></p>
+<p>BST改造成红黑树有一些约定：</p>
+<ul>
+<li>每个节点最多只有一个红链与之相连(连父亲和孩子)</li>
+<li>每条从root到null的路径，都是同样的黑链数（绝对黑平衡）</li>
+<li>红链都在左边</li>
+</ul>
+<p>这样做的好处是什么？就是之前写的代码很多基本可以不用改就可以直接用（比如get，floor，ceiling操作，因为这些操作是不需要考虑红黑链的）</p>
+<h1 id="红黑树表示"><a href="#红黑树表示" class="headerlink" title="红黑树表示"></a>红黑树表示</h1><p>红黑树表示只用在BST中加入一个用来表明链的颜色的变量就行了。默认空链是黑色，我们把颜色加在node节点的属性中，通过查找孩子的node节点颜色，我们就知道指向这个节点的链的颜色了。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084309078"> <img src="http://img.hksite.cn/1464084309078" alt=""> </a></p>
+<pre><code class="java">private static final boolean RED   = true;
+ private static final boolean BLACK = false;
+ private class Node
+ {
+    Key key;
+    Value val;
+    Node left, right;
+    boolean color;   
+// color of parent link
+ }
+ private boolean isRed(Node x)
+ {
+    if (x == null) return false;
+    return x.color == RED;
+ }
+</code></pre>
+<h1 id="红黑树操作"><a href="#红黑树操作" class="headerlink" title="红黑树操作"></a>红黑树操作</h1><h2 id="左旋操作"><a href="#左旋操作" class="headerlink" title="左旋操作"></a>左旋操作</h2><p>这个操作用来修正因任何情况导致红链出现在右边的情况。操作主要步骤：</p>
+<ol>
+<li>h的右孩子变成x的左孩子，h变成红色</li>
+<li>x的左孩子变成h，x变成黑色</li>
+<li>x作为新的子链返回</li>
+</ol>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084318192"> <img src="http://img.hksite.cn/1464084318192" alt=""> </a></p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084323247"> <img src="http://img.hksite.cn/1464084323247" alt=""> </a></p>
+<pre><code class="java">public Node rotateLeft(Node h)
+{
+    assert isRed(h.right);
+    Node x = h.right;
+    h.right = x.left;   //step 1
+    x.left = h;        //step 2
+    x.color = h.color;
+    h.color = RED;
+    return x;     //setp 3
+}
+</code></pre>
+<h2 id="右旋操作"><a href="#右旋操作" class="headerlink" title="右旋操作"></a>右旋操作</h2><p>和左旋操作差不多，只是方向变了</p>
+<ol>
+<li><p>h的左孩子变成x的右孩子，h变成红色</p>
+</li>
+<li><p>x的右孩子变成h，x变成黑色</p>
+</li>
+<li><p>x作为新的子链返回</p>
+</li>
+</ol>
+<pre><code class="java">
+    public Node rotateRight(Node h)
+    {
+        assert isRed(h.left);
+        Node x = h.left;
+        h.left = x.right;   //step 1
+        x.right = h;        //step 2
+        x.color = h.color;
+        h.color = RED;
+        return x;     //setp 3
+    }
+</code></pre>
+<h2 id="颜色翻转"><a href="#颜色翻转" class="headerlink" title="颜色翻转"></a>颜色翻转</h2><p>操作实现也比较简单，因为4节点的实现还是用的二叉树，我们只用把链的颜色改变就行了。</p>
+<pre><code class="java">private void flipColors(Node h)
+{
+    assert !isRed(h);
+    assert isRed(h.left);
+    assert isRed(h.right);
+    h.color = RED;
+    h.left.color = h.right.color = BLACK;
+}
+</code></pre>
+<h2 id="插入操作"><a href="#插入操作" class="headerlink" title="插入操作"></a>插入操作</h2><h3 id="插入只有1个节点的树"><a href="#插入只有1个节点的树" class="headerlink" title="插入只有1个节点的树"></a>插入只有1个节点的树</h3><ul>
+<li>如果是插入左边，那么比较简单，直接是插入操作加上把节点改成红色就行了</li>
+<li>如果是插入右边，那么需要做一个左旋操作。</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084738110"> <img src="http://img.hksite.cn/1464084738110" alt=""> </a></p>
+<h3 id="插入底部的一个2-节点"><a href="#插入底部的一个2-节点" class="headerlink" title="插入底部的一个2-节点"></a>插入底部的一个2-节点</h3><ul>
+<li><p>和第一种情况一样</p>
+<p>  <a data-fancybox="gallery" href="http://img.hksite.cn/1464084743817"> <img src="http://img.hksite.cn/1464084743817" alt=""> </a></p>
+</li>
+</ul>
+<h3 id="插入只有2个节点的树"><a href="#插入只有2个节点的树" class="headerlink" title="插入只有2个节点的树"></a>插入只有2个节点的树</h3><ol>
+<li>如果比它们都大，则插入最右边，形成4-节点，进行颜色翻转， 就行了</li>
+<li>如果比它们都小，则插入最左边，这时候中间节点有2条红链，进行右旋操作， 和1就一样了</li>
+<li>如果在它们之间，则插入左边节点的右侧，这时候，要进行左旋，就和2一样了。</li>
+</ol>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084748800"> <img src="http://img.hksite.cn/1464084748800" alt=""> </a></p>
+<h3 id="插入底部的一个3-节点"><a href="#插入底部的一个3-节点" class="headerlink" title="插入底部的一个3-节点"></a>插入底部的一个3-节点</h3><ul>
+<li>和上面一样，颜色翻转后，在逐层往上检查是不是有需要调整的地方（旋转，颜色翻转）</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084768514"> <img src="http://img.hksite.cn/1464084768514" alt=""> </a></p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084776157"> <img src="http://img.hksite.cn/1464084776157" alt=""> </a></p>
+<h2 id="插入总结"><a href="#插入总结" class="headerlink" title="插入总结"></a>插入总结</h2><p>其实所有的插入操作，可以归结为下面三种：</p>
+<ol>
+<li>右红，左黑：左旋</li>
+<li>左红，左孩左红：右旋</li>
+<li>双孩子红：颜色翻转</li>
+</ol>
+<h2 id="插入代码"><a href="#插入代码" class="headerlink" title="插入代码"></a>插入代码</h2><pre><code class="java">private Node put(Node h, Key key, Value val) 
+ {
+        /******原插入代码*******/
+        if (h == null) 
+            return new Node(key, val, RED);
+        int cmp = key.compareTo(h.key);
+        if (cmp &lt; 0) {
+            h.left = put(h.left, key, val);
+        } else if (cmp &gt; 0) {
+            h.right = put(h.right, key, val);
+        } else if (cmp == 0) {
+            h.val = val;
+        }
+        h.count = 1 + size(h.left) + size(h.right);
+        /******情形1*******/
+        if (isRed(h.right) &amp;&amp; !isRed(h.left)) 
+            h = rotateLeft(h);
+        /******情形2*******/
+        if (isRed(h.left) &amp;&amp; isRed(h.left.left))
+            h = rotateRight(h);
+        /******情形3*******/
+        if (isRed(h.left) &amp;&amp; isRed(h.right))
+            flipColors(h);
+        return h;
+   }
+</code></pre>
+<h1 id="红黑树构造动画"><a href="#红黑树构造动画" class="headerlink" title="红黑树构造动画"></a>红黑树构造动画</h1><p>讲了这么多，我们来看看一棵红黑树到底如何构造出来的吧，通过通话来加深理解。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464085260522"> <img src="http://img.hksite.cn/1464085260522" alt=""> </a></p>
+<h1 id="红黑树性能分析"><a href="#红黑树性能分析" class="headerlink" title="红黑树性能分析"></a>红黑树性能分析</h1><p>所有基于红黑树的符号表实现都保证操作的运行时间为对数级别！</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464084783174"> <img src="http://img.hksite.cn/1464084783174" alt=""> </a></p>
+<p>因为，不论插入的顺序如何，红黑树都几乎是完美平衡的</p>
+<p>不管是在随机情况下</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464085919633"> <img src="http://img.hksite.cn/1464085919633" alt=""> </a></p>
+<p>还是在最坏的情况下，红黑树的深度也不会超过2logN</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1464144485406"> <img src="http://img.hksite.cn/1464144485406" alt=""> </a></p>
+<p>红黑树更吸引人的一点在于，基本除了put和delete算法比较复杂，其他的代码，都可以直接使用二叉树的代码。</p>
+
+      </div>
+    </div>
+    <div class="card">
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/algorithm/2-3tree/">
+        <i class="far icon-left"></i>
+        <span class="prev-text nav-default">平衡查找树（1）—— 2-3查找树（附动画）</span>
+      </a>
+    
+    
+      <a class="next" href="/algorithm/st2/">
+        <span class="next-text nav-default">符号表ST（2）—— 初等实现分析和有序符号表</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner">
+      
+<div class="copyright">
+  Copyright
+  
+  &copy;
+  
+  <span itemprop="copyrightYear">2019</span>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hawkeye(黄锴)</span>
+  <div class='host'>
+    博客托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 
+  </div>
+  <div class="power">
+    由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+    |
+    主题 - <a href="https://github.com/hk029/hexo-theme-airy/" target="_blank">airy</a>
+  </div>
+</div>
+
+    </div>
+
+    
+    
+    
+    <script src="/lib/prism/prism.js"></script>
+    
+    <script src="/lib/jquery/jquery.min.js"></script>
+    
+    <script src="/lib/fancybox/fancybox.min.js"></script>
+    
+    <script src="/js/airy.js"></script>
+    
+    
+
+    
+    
+    
+    <script src="/js/scrollspy.js"></script>
+    
+    
+</body>
+
+</html>

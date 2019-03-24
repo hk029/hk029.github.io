@@ -1,0 +1,439 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8"/>
+<title>符号表ST（1）——基本介绍 [ HK ' Site ]</title>
+
+  
+  
+    <link rel="stylesheet" href="/css/airy.css">
+  
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+  
+    <link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+  
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="符号表ST（1）——基本介绍"/>
+
+
+
+
+  <meta name="keywords" content="前端, html, css, javascript" />
+
+
+
+
+
+
+
+<script>
+    window.config = {"title":"HK ' Site","subtitle":"一个程序猿的理想国度","description":null,"author":"hawkeye(黄锴)","language":"zh-cn","timezone":null,"url":"http://hksite.cn","root":"/","permalink":":title/","permalink_defaults":"post/","source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"/","code_dir":"downloads/code","i18n_dir":":lang","skip_render":[],"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":false,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"airy","deploy":{"type":"git","repo":"https://github.com/hk029/hksite.git","branch":"master"},"ignore":[],"keywords":"前端, html, css, javascript","auto_category":{"enable":false,"depth":1},"about_dir":"about","index_generator":{"per_page":20,"order_by":"-date","path":""},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"Home":{"url":"/","icon":"fas fa-home"},"About":{"url":"/about","icon":"fas fa-user-astronaut"},"Archives":{"url":"/archives","icon":"fas fa-tags"},"Categories":{"url":"/categories","icon":"fas fa-archive"},"Tags":{"url":"/tags","icon":"fas fa-tags"}},"favicon":"/favicon.ico","stylesheets":["/css/airy.css","/lib/font-awesome/css/all.min.css","/lib/prism/prism.css","/lib/fancybox/fancybox.min.css","/lib/iconfont/iconfont.css"],"custom_logo":{"enabled":false,"image":"/images/voidsky.png"},"scripts":["/lib/prism/prism.js","/lib/jquery/jquery.min.js","/lib/fancybox/fancybox.min.js","/js/airy.js"],"postjs":["/js/scrollspy.js"],"categories":{"english":{"img":"/images/avatar.jpg","intro":"我的英语之路"}},"leancloud":false,"toc":true,"profile":{"photo":{"url":"https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg","round":true},"introduce":"我是要成为海贼王的男人"},"social":{"github":{"icon":"fab fa-github","enable":true,"url":"http://github.com/hk029"},"weixin":{"qrcode":true,"icon":"fab fa-weixin","enable":true,"url":"/images/weixin.jpg"},"weibo":{"icon":"fab fa-weibo","enable":true,"url":"/"},"juejin":{"icon":"iconfont icon-juejin","enable":true,"url":null},"csdn":{"icon":"iconfont icon-logo_csdn","enable":true,"url":null},"jianshu":{"icon":"iconfont icon-jianshu","enable":true,"url":null}}};
+</script>
+</head>
+
+<body>
+  <div class="header-bkg"></div>
+  <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="inner">
+
+
+<div class="site-brand-wrapper">
+    <div class="site-meta">
+        <div class="custom-logo-site-title">
+            
+            <a href="/" class="brand" rel="start">
+                <span class="site-title">HK ' Site</span>
+            </a>
+            
+        </div>
+        
+        
+        <p class="site-subtitle">一个程序猿的理想国度</p>
+        
+        
+    </div>
+    <div clas="nav-menu">
+        <div class="menu-inner">
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-home"></i>
+                
+                
+                <a href="/">首页</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-user-astronaut"></i>
+                
+                
+                <a href="/about">关于</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/archives">归档</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-archive"></i>
+                
+                
+                <div class="category-menu" href="">
+                分类
+                    <div class="category-panel">
+                    <div class="triangle"></div>
+                    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a></li></ul>
+                    </div>
+                </div>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/tags">标签</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</div></div>
+  </header>
+  </div>
+  <div class="content-outer">
+    <div class="inner flex-container">
+      
+
+
+
+
+
+<ul class="breadcrumb">
+  <i class="fas fa-home"></i>
+  <li><a href="/">首页</a></li>
+  
+    
+    
+    
+      
+      <li><a href="/algorithm/">/algorithm</a></li>
+        
+        
+        
+      
+    
+  
+  
+    
+    
+    
+      
+      <li>/St1</li>
+      
+    
+  
+  
+    
+    
+    
+      
+    
+  
+  
+</ul>
+
+
+      
+      
+<article class="post">
+  <div class="right">
+    <div class="card post-toc">
+    <h1 class="title">文章目录</h1>
+    <div>
+
+        
+        
+        
+
+        
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-符号表介绍和API"><span class="nav-text">1 符号表介绍和API</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-符号表介绍"><span class="nav-text">1.1 符号表介绍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-符号表API"><span class="nav-text">1.2 符号表API</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-键和值的约定"><span class="nav-text">2 键和值的约定</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1-值（value）"><span class="nav-text">2.1 值（value）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2-键-Key"><span class="nav-text">2.2 键(Key)</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-相等性测试"><span class="nav-text">3 相等性测试</span></a></li></ol></div>
+            
+
+    </div>
+</div>
+  </div>
+  <div class="left">
+    <div class="card">
+      <div class="entry" data-scroll>
+      <div class="post-head">
+        <h1>
+          符号表ST（1）——基本介绍
+        </h1>
+        <div class="detail">
+            <span class="post-count"><i class="fas fa-calendar"></i> 2016-05-14 &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span class="post-count">       
+                <i class="fas fa-folder-open"></i>  
+                <span class="post-category">
+                    
+                    <a href="/algorithm/">algorithm</a>
+                    
+                </span>
+                
+            </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+        </div>
+        </div>
+
+        <blockquote>
+<p>本系列文章主要介绍常用的算法和数据结构的知识，记录的是《Algorithms I/II》课程的内容，采用的是“算法（第4版）”这本红宝书作为学习教材的，语言是java。这本书的名气我不用多说吧？豆瓣评分9.4，我自己也认为是极好的学习算法的书籍。通过这系列文章，可以加深对数据结构和基本算法的理解（个人认为比学校讲的清晰多了），并加深对java的理解。</p>
+</blockquote>
+<h1 id="1-符号表介绍和API"><a href="#1-符号表介绍和API" class="headerlink" title="1 符号表介绍和API"></a><strong>1 符号表介绍和API</strong></h1><h2 id="1-1-符号表介绍"><a href="#1-1-符号表介绍" class="headerlink" title="1.1 符号表介绍"></a><strong>1.1 符号表介绍</strong></h2><blockquote>
+<p>符号表（Symbol Table）是一个非常常见的数据结构，在现实生活中应用很多。它是一个“键”—“值”对应的结构。在符号表中，存储的是键值对。通过输入键，查询对应的值。</p>
+</blockquote>
+<p>这个基础的数据结构，在现实生活中使用的特别多，比如字典。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-064437.jpg"> <img src="http://img.hksite.cn/2019-03-01-064437.jpg" alt=""> </a></p>
+<h2 id="1-2-符号表API"><a href="#1-2-符号表API" class="headerlink" title="1.2 符号表API"></a><strong>1.2 符号表API</strong></h2><p>其实符号表的操作，也无非就是增删改查之类的</p>
+<table>
+<thead>
+<tr>
+<th><strong>函数名</strong></th>
+<th><strong>功能</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ST()</strong></td>
+<td>创建一个符号表对象</td>
+</tr>
+<tr>
+<td><strong>void Put(Key key, Value val)</strong></td>
+<td>往集合中插入一条键值对记录，如果value为空，不添加</td>
+</tr>
+<tr>
+<td><strong>Value Get(Key key)</strong></td>
+<td>根据key查找value，如果没找到返回null</td>
+</tr>
+<tr>
+<td><strong>void Delete(Key key)</strong></td>
+<td>删除键为key的记录</td>
+</tr>
+<tr>
+<td><strong>boolean Contains(Key key)</strong></td>
+<td>判断集合中是否存在键为key的记录</td>
+</tr>
+<tr>
+<td><strong>boolean IsEmpty()</strong></td>
+<td>判断查找表是否为空</td>
+</tr>
+<tr>
+<td><strong>int Size()</strong></td>
+<td>返回集合中键值对的个数</td>
+</tr>
+<tr>
+<td><strong>Iterable Keys()</strong></td>
+<td>返回集合中所有的键</td>
+</tr>
+</tbody>
+</table>
+<p>Ps.有一些约定要提前说一下</p>
+<ul>
+<li>值不为null - 如果key不存在，get()返回为null </li>
+<li>put()会覆盖旧值</li>
+</ul>
+<p>通过这几个约定，我们可以把contain和delete函数简单实现。</p>
+<pre><code>public boolean contains(Key key)
+{  return get(key) != null;  }
+
+public void delete(Key key)
+{  put(key, null);  }
+</code></pre><h1 id="2-键和值的约定"><a href="#2-键和值的约定" class="headerlink" title="2 键和值的约定"></a><strong>2 键和值的约定</strong></h1><h2 id="2-1-值（value）"><a href="#2-1-值（value）" class="headerlink" title="2.1 值（value）"></a><strong>2.1 值（value）</strong></h2><p>在java中如果我们想要实现一个符号表，我们希望它是支持所有泛型的。</p>
+<h2 id="2-2-键-Key"><a href="#2-2-键-Key" class="headerlink" title="2.2 键(Key)"></a><strong>2.2 键(Key)</strong></h2><p>对于键的，我们希望：</p>
+<ul>
+<li>Key是可比较的，即是<code>Comparable</code>的，并且使用<code>compareTo()</code>函数</li>
+<li>Key是泛型的</li>
+<li>能用<code>equals()</code>判断相等，能用<code>hashCode()</code>获取键（这两个函数都是java的内置函数）</li>
+<li>对于Key最好是使用不可变的类型(Integer,Double, String之类的)</li>
+</ul>
+<h1 id="3-相等性测试"><a href="#3-相等性测试" class="headerlink" title="3 相等性测试"></a><strong>3 相等性测试</strong></h1><p>如果我们提到了</p>
+<p><code>equals()</code></p>
+<p>函数，就不得不提提java的相等性测试，Java要求</p>
+<p><code>equals()</code></p>
+<p>满足：</p>
+<ul>
+<li><strong>自反性：</strong> x.equals(x) is true</li>
+<li><strong>对称性：</strong> x.equals(y) iff y.equals(x)</li>
+<li><strong>传递性：</strong> if x.equals(y) and y.equals(z), then x.equals(z)</li>
+<li><strong>不为null：</strong> x.equals(null) is false</li>
+</ul>
+<p>一般来说，我们做判断使用的( x == y ) 这个式子并不做类型检查。所以，我们在实现equals()的时候，要特别注意，它看起来很简单，但是想实现完美比较麻烦。</p>
+<p>比如一个日期的class，你可能会这样实现<code>equals()</code></p>
+<pre><code class="java">public class Date implements Comparable&lt;Date&gt;
+{
+   private final int month;
+   private final int day;
+   private final int year;
+   ...
+   public boolean equals(Date that)
+   {
+      if (this.day   != that.day  ) return false;
+      if (this.month != that.month) return false;
+      if (this.year  != that.year ) return false;
+      return true;
+   }
+}
+</code></pre>
+<p>但是你如果这样实现会更好：</p>
+<ul>
+<li>用<code>final</code>字段，不然可能会违反对称性（继承）</li>
+<li>最好用<code>Object</code>,(不过这个专家们目前还在激烈争论中)</li>
+<li>加入自反性，不为null的判断，并且验证类型一致性。</li>
+<li>关于比较一个类中的不同变量：<ul>
+<li>如果比较的是一个原始类型，用==</li>
+<li>如果比较的是一个对象，用equals()</li>
+<li>如果比较的是一个数组，对Arrays.equals(a, b)，而不是a.equals(b)<pre><code class="java">public final class Date implements Comparable&lt;Date&gt;
+{
+ private final int month;
+ private final int day;
+ private final int year;
+ ...
+ public boolean equals(Object y)
+ {
+    if (y == this) return true;
+    if (y == null) return false;
+    if (y.getClass() != this.getClass())
+       return false;
+    Date that = (Date) y;
+    if (this.day   != that.day  ) return false;
+    if (this.month != that.month) return false;
+    if (this.year  != that.year ) return false;
+    return true;
+ }
+}
+</code></pre>
+</li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    </div>
+    <div class="card">
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/algorithm/st2/">
+        <i class="far icon-left"></i>
+        <span class="prev-text nav-default">符号表ST（2）—— 初等实现分析和有序符号表</span>
+      </a>
+    
+    
+      <a class="next" href="/algorithm/st4/">
+        <span class="next-text nav-default">符号表ST（4）——二叉查找树删除 （附动画）</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner">
+      
+<div class="copyright">
+  Copyright
+  
+  &copy;
+  
+  <span itemprop="copyrightYear">2019</span>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hawkeye(黄锴)</span>
+  <div class='host'>
+    博客托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 
+  </div>
+  <div class="power">
+    由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+    |
+    主题 - <a href="https://github.com/hk029/hexo-theme-airy/" target="_blank">airy</a>
+  </div>
+</div>
+
+    </div>
+
+    
+    
+    
+    <script src="/lib/prism/prism.js"></script>
+    
+    <script src="/lib/jquery/jquery.min.js"></script>
+    
+    <script src="/lib/fancybox/fancybox.min.js"></script>
+    
+    <script src="/js/airy.js"></script>
+    
+    
+
+    
+    
+    
+    <script src="/js/scrollspy.js"></script>
+    
+    
+</body>
+
+</html>

@@ -1,0 +1,432 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8"/>
+<title>元素排序(5)——归并排序 [ HK ' Site ]</title>
+
+  
+  
+    <link rel="stylesheet" href="/css/airy.css">
+  
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+  
+    <link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+  
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="元素排序(5)——归并排序"/>
+
+
+
+
+  <meta name="keywords" content="前端, html, css, javascript" />
+
+
+
+
+
+
+
+<script>
+    window.config = {"title":"HK ' Site","subtitle":"一个程序猿的理想国度","description":null,"author":"hawkeye(黄锴)","language":"zh-cn","timezone":null,"url":"http://hksite.cn","root":"/","permalink":":title/","permalink_defaults":"post/","source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"/","code_dir":"downloads/code","i18n_dir":":lang","skip_render":[],"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":false,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"airy","deploy":{"type":"git","repo":"https://github.com/hk029/hksite.git","branch":"master"},"ignore":[],"keywords":"前端, html, css, javascript","auto_category":{"enable":false,"depth":1},"about_dir":"about","index_generator":{"per_page":20,"order_by":"-date","path":""},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"Home":{"url":"/","icon":"fas fa-home"},"About":{"url":"/about","icon":"fas fa-user-astronaut"},"Archives":{"url":"/archives","icon":"fas fa-tags"},"Categories":{"url":"/categories","icon":"fas fa-archive"},"Tags":{"url":"/tags","icon":"fas fa-tags"}},"favicon":"/favicon.ico","stylesheets":["/css/airy.css","/lib/font-awesome/css/all.min.css","/lib/prism/prism.css","/lib/fancybox/fancybox.min.css","/lib/iconfont/iconfont.css"],"custom_logo":{"enabled":false,"image":"/images/voidsky.png"},"scripts":["/lib/prism/prism.js","/lib/jquery/jquery.min.js","/lib/fancybox/fancybox.min.js","/js/airy.js"],"postjs":["/js/scrollspy.js"],"categories":{"english":{"img":"/images/avatar.jpg","intro":"我的英语之路"}},"leancloud":false,"toc":true,"profile":{"photo":{"url":"https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg","round":true},"introduce":"我是要成为海贼王的男人"},"social":{"github":{"icon":"fab fa-github","enable":true,"url":"http://github.com/hk029"},"weixin":{"qrcode":true,"icon":"fab fa-weixin","enable":true,"url":"/images/weixin.jpg"},"weibo":{"icon":"fab fa-weibo","enable":true,"url":"/"},"juejin":{"icon":"iconfont icon-juejin","enable":true,"url":null},"csdn":{"icon":"iconfont icon-logo_csdn","enable":true,"url":null},"jianshu":{"icon":"iconfont icon-jianshu","enable":true,"url":null}}};
+</script>
+</head>
+
+<body>
+  <div class="header-bkg"></div>
+  <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="inner">
+
+
+<div class="site-brand-wrapper">
+    <div class="site-meta">
+        <div class="custom-logo-site-title">
+            
+            <a href="/" class="brand" rel="start">
+                <span class="site-title">HK ' Site</span>
+            </a>
+            
+        </div>
+        
+        
+        <p class="site-subtitle">一个程序猿的理想国度</p>
+        
+        
+    </div>
+    <div clas="nav-menu">
+        <div class="menu-inner">
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-home"></i>
+                
+                
+                <a href="/">首页</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-user-astronaut"></i>
+                
+                
+                <a href="/about">关于</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/archives">归档</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-archive"></i>
+                
+                
+                <div class="category-menu" href="">
+                分类
+                    <div class="category-panel">
+                    <div class="triangle"></div>
+                    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a></li></ul>
+                    </div>
+                </div>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/tags">标签</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</div></div>
+  </header>
+  </div>
+  <div class="content-outer">
+    <div class="inner flex-container">
+      
+
+
+
+
+
+<ul class="breadcrumb">
+  <i class="fas fa-home"></i>
+  <li><a href="/">首页</a></li>
+  
+    
+    
+    
+      
+      <li><a href="/algorithm/">/algorithm</a></li>
+        
+        
+        
+      
+    
+  
+  
+    
+    
+    
+      
+      <li>/Mergesort</li>
+      
+    
+  
+  
+    
+    
+    
+      
+    
+  
+  
+</ul>
+
+
+      
+      
+<article class="post">
+  <div class="right">
+    <div class="card post-toc">
+    <h1 class="title">文章目录</h1>
+    <div>
+
+        
+        
+        
+
+        
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-归并排序介绍"><span class="nav-text">1.归并排序介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1介绍"><span class="nav-text">1介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2归并排序步骤："><span class="nav-text">1.2归并排序步骤：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-归并排序代码"><span class="nav-text">1.3 归并排序代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-实际运行步骤："><span class="nav-text">1.4 实际运行步骤：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-5-算法性能："><span class="nav-text">1.5 算法性能：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-1-比较次数和数组访问次数"><span class="nav-text">1.5.1 比较次数和数组访问次数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-2-运行时间"><span class="nav-text">1.5.2 运行时间</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-5-3-内存占用"><span class="nav-text">1.5.3 内存占用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-6-改进"><span class="nav-text">1.6 改进</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-1-对小子串使用插入排序-可以提升20-左右-：（设定一个Cutoff，-一般是7个元素）"><span class="nav-text">1.6.1 对小子串使用插入排序 (可以提升20%左右) ：（设定一个Cutoff， 一般是7个元素）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-2-对已经排序好的2个子串直接跳过Merge阶段。（对部分有序的数组有用）"><span class="nav-text">1.6.2 对已经排序好的2个子串直接跳过Merge阶段。（对部分有序的数组有用）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-6-3-不用全复制（节约时间但是不节约空间）"><span class="nav-text">1.6.3 不用全复制（节约时间但是不节约空间）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-非递归的merge-sort"><span class="nav-text">2.非递归的merge sort</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-Comparator接口"><span class="nav-text">3.Comparator接口</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#排序算法稳定性"><span class="nav-text">排序算法稳定性</span></a></li></ol></div>
+            
+
+    </div>
+</div>
+  </div>
+  <div class="left">
+    <div class="card">
+      <div class="entry" data-scroll>
+      <div class="post-head">
+        <h1>
+          元素排序(5)——归并排序
+        </h1>
+        <div class="detail">
+            <span class="post-count"><i class="fas fa-calendar"></i> 2016-05-09 &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span class="post-count">       
+                <i class="fas fa-folder-open"></i>  
+                <span class="post-category">
+                    
+                    <a href="/algorithm/">algorithm</a>
+                    
+                </span>
+                
+            </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+        </div>
+        </div>
+
+        <blockquote>
+<p>本系列文章主要介绍常用的算法和数据结构的知识，记录的是《Algorithms I/II》课程的内容，采用的是“算法（第4版）”这本红宝书作为学习教材的，语言是java。这本书的名气我不用多说吧？豆瓣评分9.4，我自己也认为是极好的学习算法的书籍。<br>通过这系列文章，可以加深对数据结构和基本算法的理解（个人认为比学校讲的清晰多了），并加深对java的理解。</p>
+</blockquote>
+<h1 id="1-归并排序介绍"><a href="#1-归并排序介绍" class="headerlink" title="1.归并排序介绍"></a>1.归并排序介绍</h1><h2 id="1介绍"><a href="#1介绍" class="headerlink" title="1介绍"></a>1介绍</h2><p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422339157"> <img src="http://img.hksite.cn/1473422339157" alt=""> </a></p>
+<h3 id="1-2归并排序步骤："><a href="#1-2归并排序步骤：" class="headerlink" title="1.2归并排序步骤："></a>1.2归并排序步骤：</h3><blockquote>
+<p>它的思想就是简单的分治（D&amp;C）。</p>
+</blockquote>
+<ul>
+<li>Divide : 分（把数组成2部分）</li>
+<li>循环分（直到不能分）</li>
+<li>Conquer : 治（合并，将每2个部分合到一起）</li>
+</ul>
+<p>分很简单，其中最关键的部分就是如何合并(Merge)，这也是这个算法的来历。<br>分两种情况讨论： 1. 当数组元素为1的时候，很简单，小的放前，大的放后。 2. 当数组元素大与2的时候，我们可以用一个新的数组和2个指针快速解决这个问题：</p>
+<ul>
+<li>复制到新数组，指针i,j分别指向2个部分的开头</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422352881"> <img src="http://img.hksite.cn/1473422352881" alt=""> </a></p>
+<ul>
+<li>如果aux[i] &lt; aux[j] 则把aux[i]的元素放到a[k]，然后i 和 k向后移动，反之同理，直到遍历完所有元素。</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422366674"> <img src="http://img.hksite.cn/1473422366674" alt=""> </a></p>
+<p>可以发现，每次Merge的时间复杂度是O(n)，加上一共合并log2N次，可以说是非常不错。</p>
+<h2 id="1-3-归并排序代码"><a href="#1-3-归并排序代码" class="headerlink" title="1.3 归并排序代码"></a>1.3 归并排序代码</h2><pre><code class="java">private static void merge(Comparable[] a, Comparable[] aux, int lo, int mid, int hi)
+{
+   assert isSorted(a, lo, mid);    // precondition: a[lo..mid]   sorted
+   assert isSorted(a, mid+1, hi);  // precondition: a[mid+1..hi] sorted
+   for (int k = lo; k &lt;= hi; k++)
+      aux[k] = a[k];
+   int i = lo, j = mid+1;
+   for (int k = lo; k &lt;= hi; k++) 
+   {
+      if (i &gt; mid)              
+          a[k] = aux[j++];
+      else if (j &gt; hi)               
+          a[k] = aux[i++];
+      else if (less(aux[j], aux[i])) 
+          a[k] = aux[j++];
+      else                           
+          a[k] = aux[i++];
+   }
+   assert isSorted(a, lo, hi);     
+// postcondition: a[lo..hi] sorted
+}
+</code></pre>
+<p>上面3处assert的好处是： </p>
+<ul>
+<li>帮助发现逻辑上的错误 </li>
+<li>可以说明代码是做什么用的</li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422732796"> <img src="http://img.hksite.cn/1473422732796" alt=""> </a></p>
+<pre><code class="java">public class Merge
+{
+   private static void merge(...)
+   {  
+/* as before */
+  }
+   private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi)
+   {
+      if (hi &lt;= lo) return;
+      int mid = lo + (hi - lo) / 2;
+      sort(a, aux, lo, mid);
+      sort(a, aux, mid+1, hi);
+      merge(a, aux, lo, mid, hi);
+   }
+   public static void sort(Comparable[] a)
+   {
+      aux = new Comparable[a.length];
+      sort(a, aux, 0, a.length - 1);
+   }
+}
+</code></pre>
+<p>注意： </p>
+<ol>
+<li>上面两处sort，一个是提供对外的接口，一个是对内的递归调用使用的。 </li>
+<li>在对外接口中创建aux数组，而不要在内部调用的sort中创建aux数组，否则会出现bug。</li>
+</ol>
+<h2 id="1-4-实际运行步骤："><a href="#1-4-实际运行步骤：" class="headerlink" title="1.4 实际运行步骤："></a>1.4 实际运行步骤：</h2><p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422724077"> <img src="http://img.hksite.cn/1473422724077" alt=""> </a></p>
+<h2 id="1-5-算法性能："><a href="#1-5-算法性能：" class="headerlink" title="1.5 算法性能："></a>1.5 算法性能：</h2><h3 id="1-5-1-比较次数和数组访问次数"><a href="#1-5-1-比较次数和数组访问次数" class="headerlink" title="1.5.1 比较次数和数组访问次数"></a>1.5.1 比较次数和数组访问次数</h3><p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422696570"> <img src="http://img.hksite.cn/1473422696570" alt=""> </a></p>
+<h3 id="1-5-2-运行时间"><a href="#1-5-2-运行时间" class="headerlink" title="1.5.2 运行时间"></a>1.5.2 运行时间</h3><p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422690905"> <img src="http://img.hksite.cn/1473422690905" alt=""> </a></p>
+<h3 id="1-5-3-内存占用"><a href="#1-5-3-内存占用" class="headerlink" title="1.5.3 内存占用"></a>1.5.3 内存占用</h3><p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422656837"> <img src="http://img.hksite.cn/1473422656837" alt=""> </a></p>
+<h2 id="1-6-改进"><a href="#1-6-改进" class="headerlink" title="1.6 改进"></a>1.6 改进</h2><blockquote>
+<p>归并排序的速度很快，唯一的不足就是内存占用很大（目前有可以不用额外空间的归并排序，这里不涉及）特别是小子串的开销很大，有一些改进的方案，可以减少对内存的占用。</p>
+</blockquote>
+<h3 id="1-6-1-对小子串使用插入排序-可以提升20-左右-：（设定一个Cutoff，-一般是7个元素）"><a href="#1-6-1-对小子串使用插入排序-可以提升20-左右-：（设定一个Cutoff，-一般是7个元素）" class="headerlink" title="1.6.1 对小子串使用插入排序 (可以提升20%左右) ：（设定一个Cutoff， 一般是7个元素）"></a>1.6.1 对小子串使用插入排序 (可以提升20%左右) ：（设定一个Cutoff， 一般是7个元素）</h3><pre><code class="java">private static void sort(Comparable[] a, Comparable[] aux, int lo, int hi)
+{
+   if (hi &lt;= lo + CUTOFF - 1)
+   {
+      Insertion.sort(a, lo, hi);
+      return;
+   }
+   int mid = lo + (hi - lo) / 2;
+   sort (a, aux, lo, mid);
+   sort (a, aux, mid+1, hi);
+   merge(a, aux, lo, mid, hi);
+}
+</code></pre>
+<h3 id="1-6-2-对已经排序好的2个子串直接跳过Merge阶段。（对部分有序的数组有用）"><a href="#1-6-2-对已经排序好的2个子串直接跳过Merge阶段。（对部分有序的数组有用）" class="headerlink" title="1.6.2 对已经排序好的2个子串直接跳过Merge阶段。（对部分有序的数组有用）"></a>1.6.2 对已经排序好的2个子串直接跳过Merge阶段。（对部分有序的数组有用）</h3><p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422648359"> <img src="http://img.hksite.cn/1473422648359" alt=""> </a></p>
+<h3 id="1-6-3-不用全复制（节约时间但是不节约空间）"><a href="#1-6-3-不用全复制（节约时间但是不节约空间）" class="headerlink" title="1.6.3 不用全复制（节约时间但是不节约空间）"></a>1.6.3 不用全复制（节约时间但是不节约空间）</h3><p>把aux和a的位置交换，每次只用在Merge的时候从一个数组移动到另一个数组就行了，减少了复制的过程。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422642285"> <img src="http://img.hksite.cn/1473422642285" alt=""> </a></p>
+<h1 id="2-非递归的merge-sort"><a href="#2-非递归的merge-sort" class="headerlink" title="2.非递归的merge sort"></a>2.非递归的merge sort</h1><p>之前讲的mergesort是一个递归版本，这个是一个非递归的版本。 思想也很简单，就是依次对每隔1,2,4,8的子串进行merge。 比如： 第一次是[0]+[1] [2]+[3] [3]+[4] …… 第二次是[0-1] + [2-3] …… 第三次是[0-3] + [4-7] …… 直到排序完毕</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422632623"> <img src="http://img.hksite.cn/1473422632623" alt=""> </a></p>
+<h1 id="3-Comparator接口"><a href="#3-Comparator接口" class="headerlink" title="3.Comparator接口"></a>3.Comparator接口</h1><blockquote>
+<p>如果你需要对一个对象的多个键值进行排序（比如一首歌的歌名，作者，日期等），可以考虑用Comparator。</p>
+</blockquote>
+<p>在class中间，可以申明几个Comparator接口，并实现比较函数</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422614628"> <img src="http://img.hksite.cn/1473422614628" alt=""> </a></p>
+<p>然后在使用的时候，改sort函数，把Comparator作为一个参数传入（注意要更改之前的数组的变量类型为object）</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422606287"> <img src="http://img.hksite.cn/1473422606287" alt=""> </a></p>
+<p>使用的时候，加入比较参数就行了</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422596525"> <img src="http://img.hksite.cn/1473422596525" alt=""> </a></p>
+<h1 id="排序算法稳定性"><a href="#排序算法稳定性" class="headerlink" title="排序算法稳定性"></a>排序算法稳定性</h1><blockquote>
+<p>一个排序算法还有一个衡量指标就是，它是否是稳定的，稳定的如何衡量呢？就是对于有同样排序等级的元素B1B2，原本B1在前面的，结果排序后它到后面去了变成B2B1了。这就是不稳定的。在现实生活中，这个性质还是很重要的。</p>
+</blockquote>
+<p>比如，我们已经按名字排好序的一个名单，我们按第二项排序，我们期望的是第二项相同的情况下，名字在前面的依然在前面，结果，发现并不是这样，这就是不稳定排序。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422439850"> <img src="http://img.hksite.cn/1473422439850" alt=""> </a></p>
+<p>很容易知道，我们之前学的算法，插入排序是稳定的，因为它每当比较到一个相同的元素时，就停止了，不会继续比较了。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422429621"> <img src="http://img.hksite.cn/1473422429621" alt=""> </a></p>
+<p>插入排序是不稳定的，因为涉及到长距离的交换</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422423610"> <img src="http://img.hksite.cn/1473422423610" alt=""> </a></p>
+<p>同理，希尔排序也是不稳定的</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422412476"> <img src="http://img.hksite.cn/1473422412476" alt=""> </a></p>
+<p>归并排序是稳定的，因为我们在编程的时候可以规定。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/1473422407058"> <img src="http://img.hksite.cn/1473422407058" alt=""> </a></p>
+
+      </div>
+    </div>
+    <div class="card">
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/algorithm/quicksort/">
+        <i class="far icon-left"></i>
+        <span class="prev-text nav-default">元素排序(6)——重头戏：快速排序</span>
+      </a>
+    
+    
+      <a class="next" href="/algorithm/bi-heap/">
+        <span class="next-text nav-default">优先队列(2)——二叉堆</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner">
+      
+<div class="copyright">
+  Copyright
+  
+  &copy;
+  
+  <span itemprop="copyrightYear">2019</span>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hawkeye(黄锴)</span>
+  <div class='host'>
+    博客托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 
+  </div>
+  <div class="power">
+    由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+    |
+    主题 - <a href="https://github.com/hk029/hexo-theme-airy/" target="_blank">airy</a>
+  </div>
+</div>
+
+    </div>
+
+    
+    
+    
+    <script src="/lib/prism/prism.js"></script>
+    
+    <script src="/lib/jquery/jquery.min.js"></script>
+    
+    <script src="/lib/fancybox/fancybox.min.js"></script>
+    
+    <script src="/js/airy.js"></script>
+    
+    
+
+    
+    
+    
+    <script src="/js/scrollspy.js"></script>
+    
+    
+</body>
+
+</html>

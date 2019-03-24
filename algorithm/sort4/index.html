@@ -1,0 +1,392 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8"/>
+<title>元素排序(4)——凸包问题 [ HK ' Site ]</title>
+
+  
+  
+    <link rel="stylesheet" href="/css/airy.css">
+  
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+  
+    <link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+  
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="元素排序(4)——凸包问题"/>
+
+
+
+
+  <meta name="keywords" content="前端, html, css, javascript" />
+
+
+
+
+
+
+
+<script>
+    window.config = {"title":"HK ' Site","subtitle":"一个程序猿的理想国度","description":null,"author":"hawkeye(黄锴)","language":"zh-cn","timezone":null,"url":"http://hksite.cn","root":"/","permalink":":title/","permalink_defaults":"post/","source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"/","code_dir":"downloads/code","i18n_dir":":lang","skip_render":[],"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":false,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"airy","deploy":{"type":"git","repo":"https://github.com/hk029/hksite.git","branch":"master"},"ignore":[],"keywords":"前端, html, css, javascript","auto_category":{"enable":false,"depth":1},"about_dir":"about","index_generator":{"per_page":20,"order_by":"-date","path":""},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"Home":{"url":"/","icon":"fas fa-home"},"About":{"url":"/about","icon":"fas fa-user-astronaut"},"Archives":{"url":"/archives","icon":"fas fa-tags"},"Categories":{"url":"/categories","icon":"fas fa-archive"},"Tags":{"url":"/tags","icon":"fas fa-tags"}},"favicon":"/favicon.ico","stylesheets":["/css/airy.css","/lib/font-awesome/css/all.min.css","/lib/prism/prism.css","/lib/fancybox/fancybox.min.css","/lib/iconfont/iconfont.css"],"custom_logo":{"enabled":false,"image":"/images/voidsky.png"},"scripts":["/lib/prism/prism.js","/lib/jquery/jquery.min.js","/lib/fancybox/fancybox.min.js","/js/airy.js"],"postjs":["/js/scrollspy.js"],"categories":{"english":{"img":"/images/avatar.jpg","intro":"我的英语之路"}},"leancloud":false,"toc":true,"profile":{"photo":{"url":"https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg","round":true},"introduce":"我是要成为海贼王的男人"},"social":{"github":{"icon":"fab fa-github","enable":true,"url":"http://github.com/hk029"},"weixin":{"qrcode":true,"icon":"fab fa-weixin","enable":true,"url":"/images/weixin.jpg"},"weibo":{"icon":"fab fa-weibo","enable":true,"url":"/"},"juejin":{"icon":"iconfont icon-juejin","enable":true,"url":null},"csdn":{"icon":"iconfont icon-logo_csdn","enable":true,"url":null},"jianshu":{"icon":"iconfont icon-jianshu","enable":true,"url":null}}};
+</script>
+</head>
+
+<body>
+  <div class="header-bkg"></div>
+  <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="inner">
+
+
+<div class="site-brand-wrapper">
+    <div class="site-meta">
+        <div class="custom-logo-site-title">
+            
+            <a href="/" class="brand" rel="start">
+                <span class="site-title">HK ' Site</span>
+            </a>
+            
+        </div>
+        
+        
+        <p class="site-subtitle">一个程序猿的理想国度</p>
+        
+        
+    </div>
+    <div clas="nav-menu">
+        <div class="menu-inner">
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-home"></i>
+                
+                
+                <a href="/">首页</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-user-astronaut"></i>
+                
+                
+                <a href="/about">关于</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/archives">归档</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-archive"></i>
+                
+                
+                <div class="category-menu" href="">
+                分类
+                    <div class="category-panel">
+                    <div class="triangle"></div>
+                    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a></li></ul>
+                    </div>
+                </div>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/tags">标签</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</div></div>
+  </header>
+  </div>
+  <div class="content-outer">
+    <div class="inner flex-container">
+      
+
+
+
+
+
+<ul class="breadcrumb">
+  <i class="fas fa-home"></i>
+  <li><a href="/">首页</a></li>
+  
+    
+    
+    
+      
+      <li><a href="/algorithm/">/algorithm</a></li>
+        
+        
+        
+      
+    
+  
+  
+    
+    
+    
+      
+      <li>/Sort4</li>
+      
+    
+  
+  
+    
+    
+    
+      
+    
+  
+  
+</ul>
+
+
+      
+      
+<article class="post">
+  <div class="right">
+    <div class="card post-toc">
+    <h1 class="title">文章目录</h1>
+    <div>
+
+        
+        
+        
+
+        
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#凸包问题"><span class="nav-text">凸包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#凸包问题的应用"><span class="nav-text">凸包问题的应用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#凸包的几何性质"><span class="nav-text">凸包的几何性质</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Graham-扫描算法"><span class="nav-text">Graham 扫描算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#代码"><span class="nav-text">代码</span></a></li></ol></li></ol></li></ol></div>
+            
+
+    </div>
+</div>
+  </div>
+  <div class="left">
+    <div class="card">
+      <div class="entry" data-scroll>
+      <div class="post-head">
+        <h1>
+          元素排序(4)——凸包问题
+        </h1>
+        <div class="detail">
+            <span class="post-count"><i class="fas fa-calendar"></i> 2016-05-10 &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span class="post-count">       
+                <i class="fas fa-folder-open"></i>  
+                <span class="post-category">
+                    
+                    <a href="/algorithm/">algorithm</a>
+                    
+                </span>
+                
+            </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+        </div>
+        </div>
+
+        <blockquote>
+<p>本系列文章主要介绍常用的算法和数据结构的知识，记录的是《Algorithms I/II》课程的内容，采用的是“<a href="https://book.douban.com/subject/19952400/" target="_blank" rel="noopener">算法（第4版）</a>”这本红宝书作为学习教材的，语言是java。这本书的名气我不用多说吧？豆瓣评分9.4，我自己也认为是极好的学习算法的书籍。</p>
+<p><strong>通过这系列文章，可以加深对数据结构和基本算法的理解（个人认为比学校讲的清晰多了），并加深对java的理解。</strong></p>
+</blockquote>
+<h1 id="凸包问题"><a href="#凸包问题" class="headerlink" title="凸包问题"></a>凸包问题</h1><blockquote>
+<p>凸包问题就是说，找到一个最小的凸多边形能圈住所有的点。</p>
+</blockquote>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-02-034103.png"> <img src="http://img.hksite.cn/2019-03-02-034103.png" alt="image-20190302114058829"> </a></p>
+<h2 id="凸包问题的应用"><a href="#凸包问题的应用" class="headerlink" title="凸包问题的应用"></a>凸包问题的应用</h2><ul>
+<li><p><strong>运动规划：</strong>找到从s到t的不经过多边形障碍的最短路径，最短路径肯定在凸包上</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-02-033901.png"> <img src="http://img.hksite.cn/2019-03-02-033901.png" alt=""> </a></p>
+</li>
+</ul>
+<ul>
+<li><p><strong>最远的一对：</strong> 在平面上找一对相距最远的点，它们肯定在凸包上 </p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-02-033949.png"> <img src="http://img.hksite.cn/2019-03-02-033949.png" alt="image-20190302113949544"> </a></p>
+</li>
+</ul>
+<h2 id="凸包的几何性质"><a href="#凸包的几何性质" class="headerlink" title="凸包的几何性质"></a>凸包的几何性质</h2><ul>
+<li>可以通过逆时针遍历所有凸包顶点</li>
+<li>凸包的顶点是关于p的极角的递增序列，而p拥有最小的y坐标。 </li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072720.jpg"> <img src="http://img.hksite.cn/2019-03-01-072720.jpg" alt=""> </a></p>
+<h2 id="Graham-扫描算法"><a href="#Graham-扫描算法" class="headerlink" title="Graham 扫描算法"></a>Graham 扫描算法</h2><ol>
+<li><strong>选择y坐标最小的p</strong><ul>
+<li>如何确定最小y坐标？<br>循环一遍</li>
+</ul>
+</li>
+<li><strong>对所有的点按关于p的 极角排序</strong><ul>
+<li>如何对点进行极角排序？</li>
+<li>如何效率的排序？<br>用MergeSort</li>
+</ul>
+</li>
+<li><p><strong>按顺序连接每个点，如果发现打破$p_{i−2}→p_{i−1}→p_i$ 打破了逆时针的原则，则舍弃$p_{i−1},p_i$。</strong> </p>
+<ul>
+<li>如何判断是否打破了逆时针原则ccw？</li>
+<li><p>如何解决退化问题（多个点在一条直线上） </p>
+<p>通过计算（b-a）和（c-a）的叉乘就行了。<br>如果area &gt; 0 则是逆时针，<br>如果area &lt; 0 则是顺时针<br>如果area = 0 则是共线 </p>
+</li>
+</ul>
+</li>
+</ol>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072728.jpg"> <img src="http://img.hksite.cn/2019-03-01-072728.jpg" alt=""> </a></p>
+<h3 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h3><p>由于每次要判断最后的2个点是否是逆时针，毫无疑问使用栈结构是比较合适的</p>
+<pre><code class="java">public class Point2D 
+{
+   private final double x;
+   private final double y;
+   public Point2D(double x, double y)
+   {
+      this.x = x;
+      this.y = y;
+   } 
+   ...
+   public static int ccw(Point2D a, Point2D b, Point2D c)
+   {
+      double area2 = (b.x-a.x)*(c.y-a.y) - (b.y-a.y)*(c.x-a.x);
+      if      (area2 &lt; 0) return -1;  
+// clockwise
+      else if (area2 &gt; 0) return +1;  
+// counter-clockwise
+      else                return  0;  
+// collinear
+   }
+}
+stack&lt;Point2D&gt; hull = new Stack&lt;Point&gt;();
+Array.sort(p,Point2D.Y_ORDER);//find p
+Array.sort(p,p[0],BY_POLAR_ORDER)//
+
+hull.push(p[0]);
+hull.push(p[1]);
+
+for(i = 2;i &lt;　N;i++)
+{
+    Point2D top = hull.pop();
+    // 如果是小于0，说明是顺时针，继续Pop一个
+    while(Point2D.ccw(hull.peek(),top,p[i]) &lt;= 0)
+        top = hull.pop();
+    hull.push(top);
+    hull.push(p[i]);
+
+}
+</code></pre>
+
+      </div>
+    </div>
+    <div class="card">
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/algorithm/sort3/">
+        <i class="far icon-left"></i>
+        <span class="prev-text nav-default">元素排序(3)——洗牌算法</span>
+      </a>
+    
+    
+      <a class="next" href="/algorithm/quicksort/">
+        <span class="next-text nav-default">元素排序(6)——重头戏：快速排序</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner">
+      
+<div class="copyright">
+  Copyright
+  
+  &copy;
+  
+  <span itemprop="copyrightYear">2019</span>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hawkeye(黄锴)</span>
+  <div class='host'>
+    博客托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 
+  </div>
+  <div class="power">
+    由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+    |
+    主题 - <a href="https://github.com/hk029/hexo-theme-airy/" target="_blank">airy</a>
+  </div>
+</div>
+
+    </div>
+
+    
+    
+    
+    <script src="/lib/prism/prism.js"></script>
+    
+    <script src="/lib/jquery/jquery.min.js"></script>
+    
+    <script src="/lib/fancybox/fancybox.min.js"></script>
+    
+    <script src="/js/airy.js"></script>
+    
+    
+
+    
+    
+    
+    <script src="/js/scrollspy.js"></script>
+    
+    
+</body>
+
+</html>

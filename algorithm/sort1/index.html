@@ -1,0 +1,403 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="">
+
+<head>
+  <meta charset="UTF-8"/>
+<title>sort1 [ HK ' Site ]</title>
+
+  
+  
+    <link rel="stylesheet" href="/css/airy.css">
+  
+    <link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+  
+    <link rel="stylesheet" href="/lib/prism/prism.css">
+  
+    <link rel="stylesheet" href="/lib/fancybox/fancybox.min.css">
+  
+    <link rel="stylesheet" href="/lib/iconfont/iconfont.css">
+  
+
+
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+
+  <meta name="description" content="sort1"/>
+
+
+
+
+  <meta name="keywords" content="前端, html, css, javascript" />
+
+
+
+
+
+
+
+<script>
+    window.config = {"title":"HK ' Site","subtitle":"一个程序猿的理想国度","description":null,"author":"hawkeye(黄锴)","language":"zh-cn","timezone":null,"url":"http://hksite.cn","root":"/","permalink":":title/","permalink_defaults":"post/","source_dir":"source","public_dir":"public","tag_dir":"tags","archive_dir":"archives","category_dir":"/","code_dir":"downloads/code","i18n_dir":":lang","skip_render":[],"new_post_name":":title.md","default_layout":"post","titlecase":false,"external_link":true,"filename_case":0,"render_drafts":false,"post_asset_folder":false,"relative_link":false,"future":true,"highlight":{"enable":false,"auto_detect":false,"line_number":true,"tab_replace":null},"default_category":"uncategorized","category_map":null,"tag_map":null,"date_format":"YYYY-MM-DD","time_format":"HH:mm:ss","per_page":20,"pagination_dir":"page","theme":"airy","deploy":{"type":"git","repo":"https://github.com/hk029/hksite.git","branch":"master"},"ignore":[],"keywords":"前端, html, css, javascript","auto_category":{"enable":false,"depth":1},"about_dir":"about","index_generator":{"per_page":20,"order_by":"-date","path":""},"archive_generator":{"per_page":20,"yearly":true,"monthly":true,"daily":false},"category_generator":{"per_page":20},"tag_generator":{"per_page":20},"marked":{"gfm":true,"pedantic":false,"sanitize":false,"tables":true,"breaks":true,"smartLists":true,"smartypants":true,"modifyAnchors":"","autolink":true},"server":{"port":4000,"log":false,"compress":false,"header":true},"menu":{"Home":{"url":"/","icon":"fas fa-home"},"About":{"url":"/about","icon":"fas fa-user-astronaut"},"Archives":{"url":"/archives","icon":"fas fa-tags"},"Categories":{"url":"/categories","icon":"fas fa-archive"},"Tags":{"url":"/tags","icon":"fas fa-tags"}},"favicon":"/favicon.ico","stylesheets":["/css/airy.css","/lib/font-awesome/css/all.min.css","/lib/prism/prism.css","/lib/fancybox/fancybox.min.css","/lib/iconfont/iconfont.css"],"custom_logo":{"enabled":false,"image":"/images/voidsky.png"},"scripts":["/lib/prism/prism.js","/lib/jquery/jquery.min.js","/lib/fancybox/fancybox.min.js","/js/airy.js"],"postjs":["/js/scrollspy.js"],"categories":{"english":{"img":"/images/avatar.jpg","intro":"我的英语之路"}},"leancloud":false,"toc":true,"profile":{"photo":{"url":"https://ws2.sinaimg.cn/large/006tNc79gy1fvu2ao3m3vj30uq0tgne4.jpg","round":true},"introduce":"我是要成为海贼王的男人"},"social":{"github":{"icon":"fab fa-github","enable":true,"url":"http://github.com/hk029"},"weixin":{"qrcode":true,"icon":"fab fa-weixin","enable":true,"url":"/images/weixin.jpg"},"weibo":{"icon":"fab fa-weibo","enable":true,"url":"/"},"juejin":{"icon":"iconfont icon-juejin","enable":true,"url":null},"csdn":{"icon":"iconfont icon-logo_csdn","enable":true,"url":null},"jianshu":{"icon":"iconfont icon-jianshu","enable":true,"url":null}}};
+</script>
+</head>
+
+<body>
+  <div class="header-bkg"></div>
+  <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="inner">
+
+
+<div class="site-brand-wrapper">
+    <div class="site-meta">
+        <div class="custom-logo-site-title">
+            
+            <a href="/" class="brand" rel="start">
+                <span class="site-title">HK ' Site</span>
+            </a>
+            
+        </div>
+        
+        
+        <p class="site-subtitle">一个程序猿的理想国度</p>
+        
+        
+    </div>
+    <div clas="nav-menu">
+        <div class="menu-inner">
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-home"></i>
+                
+                
+                <a href="/">首页</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-user-astronaut"></i>
+                
+                
+                <a href="/about">关于</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/archives">归档</a>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-archive"></i>
+                
+                
+                <div class="category-menu" href="">
+                分类
+                    <div class="category-panel">
+                    <div class="triangle"></div>
+                    <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/algorithm/">algorithm</a></li><li class="category-list-item"><a class="category-list-link" href="/数据库/">数据库</a></li></ul>
+                    </div>
+                </div>
+                
+            </span>
+            
+            
+            <span class="menu-item">
+                
+                <i class="fas fa-fas fa-tags"></i>
+                
+                
+                <a href="/tags">标签</a>
+                
+            </span>
+            
+        </div>
+    </div>
+</div></div>
+  </header>
+  </div>
+  <div class="content-outer">
+    <div class="inner flex-container">
+      
+
+
+
+
+
+<ul class="breadcrumb">
+  <i class="fas fa-home"></i>
+  <li><a href="/">首页</a></li>
+  
+    
+    
+    
+      
+      <li><a href="/algorithm/">/algorithm</a></li>
+        
+        
+        
+      
+    
+  
+  
+    
+    
+    
+      
+      <li>/Sort1</li>
+      
+    
+  
+  
+    
+    
+    
+      
+    
+  
+  
+</ul>
+
+
+      
+      
+<article class="post">
+  <div class="right">
+    <div class="card post-toc">
+    <h1 class="title">文章目录</h1>
+    <div>
+
+        
+        
+        
+
+        
+            <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#1-排序问题"><span class="nav-text">1. 排序问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-回调函数"><span class="nav-text">1.1 回调函数</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-Java中回调函数的路线图"><span class="nav-text">1.2 Java中回调函数的路线图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-全序关系"><span class="nav-text">1.3 全序关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-4-Comparable-API"><span class="nav-text">1.4 Comparable API</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-1-实现原则"><span class="nav-text">1.4.1 实现原则</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-4-2-例子"><span class="nav-text">1.4.2 例子</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#2-选择排序"><span class="nav-text">2.选择排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#2-1选择排序思想（动画）"><span class="nav-text">2.1选择排序思想（动画）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-2选择排序的内部循环不变性"><span class="nav-text">2.2选择排序的内部循环不变性</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#3-插入排序"><span class="nav-text">3.插入排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#3-1插入排序思想（动画）"><span class="nav-text">3.1插入排序思想（动画）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-2插入排序的内部循环不变性"><span class="nav-text">3.2插入排序的内部循环不变性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-3插入排序代码"><span class="nav-text">3.3插入排序代码</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-4-插入排序分析"><span class="nav-text">3.4 插入排序分析</span></a></li></ol></li></ol></div>
+            
+
+    </div>
+</div>
+  </div>
+  <div class="left">
+    <div class="card">
+      <div class="entry" data-scroll>
+      <div class="post-head">
+        <h1>
+          sort1
+        </h1>
+        <div class="detail">
+            <span class="post-count"><i class="fas fa-calendar"></i> 2016-05-10 &nbsp;&nbsp;|&nbsp;&nbsp;</span>
+            <span class="post-count">       
+                <i class="fas fa-folder-open"></i>  
+                <span class="post-category">
+                    
+                    <a href="/algorithm/">algorithm</a>
+                    
+                </span>
+                
+            </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+            <span class="post-count">&nbsp;&nbsp;|&nbsp;&nbsp;<i class="fas fa-poll"></i> </span>
+        </div>
+        </div>
+
+        <blockquote>
+<p>本系列文章主要介绍常用的算法和数据结构的知识，记录的是《Algorithms I/II》课程的内容，采用的是“<a href="https://book.douban.com/subject/19952400/" target="_blank" rel="noopener">算法（第4版）</a>”这本红宝书作为学习教材的，语言是java。这本书的名气我不用多说吧？豆瓣评分9.4，我自己也认为是极好的学习算法的书籍。</p>
+<p><strong>通过这系列文章，可以加深对数据结构和基本算法的理解（个人认为比学校讲的清晰多了），并加深对java的理解。</strong></p>
+</blockquote>
+<h1 id="1-排序问题"><a href="#1-排序问题" class="headerlink" title="1. 排序问题"></a>1. 排序问题</h1><blockquote>
+<p>排序问题在日常生活中非常常见，例如最简单的，学生名单，就有多种排序，名字，成绩，号码，宿舍号…… </p>
+</blockquote>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-071840.jpg"> <img src="http://img.hksite.cn/2019-03-01-071840.jpg" alt=""> </a></p>
+<p>问题是，我们如何对多种类型进行排序？</p>
+<ul>
+<li>答案是——回调函数。 </li>
+</ul>
+<p>它的实现思路很简单： 我们调用系统的sort函数，系统根据需要通过回调对象的CompareTo函数，对特定的对象进行排序。</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-071707.jpg"> <img src="http://img.hksite.cn/2019-03-01-071707.jpg" alt=""> </a></p>
+<h2 id="1-1-回调函数"><a href="#1-1-回调函数" class="headerlink" title="1.1 回调函数"></a>1.1 回调函数</h2><p>在不同的语言中，有不同的实现回调函数的方式，其中java使用的是Interfaces </p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072004.jpg"> <img src="http://img.hksite.cn/2019-03-01-072004.jpg" alt=""> </a></p>
+<h2 id="1-2-Java中回调函数的路线图"><a href="#1-2-Java中回调函数的路线图" class="headerlink" title="1.2 Java中回调函数的路线图"></a>1.2 Java中回调函数的路线图</h2><p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-071955.jpg"> <img src="http://img.hksite.cn/2019-03-01-071955.jpg" alt=""> </a></p>
+<h2 id="1-3-全序关系"><a href="#1-3-全序关系" class="headerlink" title="1.3 全序关系"></a>1.3 全序关系</h2><p>设集合X上有一全序关系，如果我们把这种关系用 ≤ 表述，则下列陈述对于 X 中的所有 a, b 和 c 成立： </p>
+<blockquote>
+<ul>
+<li>如果 a≤b 且 b≤a 则 a=b (反对称性) </li>
+<li>如果 a≤b 且 b≤c 则 a≤c (传递性) </li>
+<li>a≤b 或 b≤a (完全性)<br><strong>注意：</strong> double 的 ≤ 不是全序</li>
+</ul>
+</blockquote>
+<h2 id="1-4-Comparable-API"><a href="#1-4-Comparable-API" class="headerlink" title="1.4 Comparable API"></a>1.4 Comparable API</h2><h3 id="1-4-1-实现原则"><a href="#1-4-1-实现原则" class="headerlink" title="1.4.1 实现原则"></a>1.4.1 实现原则</h3><ul>
+<li>必须是全序</li>
+<li>小于，等于，大于分别返回负数（-1）,0, 正数（1）</li>
+<li>对于不兼容的类型，抛出异常 </li>
+</ul>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072023.jpg"> <img src="http://img.hksite.cn/2019-03-01-072023.jpg" alt=""> </a></p>
+<h3 id="1-4-2-例子"><a href="#1-4-2-例子" class="headerlink" title="1.4.2 例子"></a>1.4.2 例子</h3><p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072028.jpg"> <img src="http://img.hksite.cn/2019-03-01-072028.jpg" alt=""> </a></p>
+<p>2个比较有用的排序抽象 :</p>
+<ul>
+<li>小于</li>
+<li>交换</li>
+</ul>
+<p>这两个功能在排序上用处很多</p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072039.jpg"> <img src="http://img.hksite.cn/2019-03-01-072039.jpg" alt=""> </a></p>
+<h1 id="2-选择排序"><a href="#2-选择排序" class="headerlink" title="2.选择排序"></a>2.选择排序</h1><h2 id="2-1选择排序思想（动画）"><a href="#2-1选择排序思想（动画）" class="headerlink" title="2.1选择排序思想（动画）"></a>2.1选择排序思想（动画）</h2><p>选择排序是很简单的思想：<br>选择最小的和第一个数交换，第二小的的跟第二个数交换…… </p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-20160406224909757.gif"> <img src="http://img.hksite.cn/2019-03-01-20160406224909757.gif" alt=""> </a></p>
+<h2 id="2-2选择排序的内部循环不变性"><a href="#2-2选择排序的内部循环不变性" class="headerlink" title="2.2选择排序的内部循环不变性"></a>2.2选择排序的内部循环不变性</h2><p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072112.jpg"> <img src="http://img.hksite.cn/2019-03-01-072112.jpg" alt=""> </a></p>
+<p>##2.3选择排序代码</p>
+<pre><code class="java">public class Selection
+{
+   public static void sort(Comparable[] a)
+   {
+      int N = a.length;
+      for (int i = 0; i &lt; N; i++)
+      {
+         int min = i;
+         for (int j = i+1; j &lt; N; j++)
+            if (less(a[j], a[min]))
+               min = j;
+         exch(a, i, min);
+      }
+   }
+   private static boolean less(Comparable v, Comparable w)
+   {  
+/* as before */
+  }
+   private static void exch(Comparable[] a, int i, int j)
+   {  
+/* as before */
+  }
+}
+</code></pre>
+<h1 id="3-插入排序"><a href="#3-插入排序" class="headerlink" title="3.插入排序"></a>3.插入排序</h1><h2 id="3-1插入排序思想（动画）"><a href="#3-1插入排序思想（动画）" class="headerlink" title="3.1插入排序思想（动画）"></a>3.1插入排序思想（动画）</h2><p>插入排序算法思想也很简单：<br>每来一个数，把他插入到前面对应的位置，使得前面一直有序<br><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-20160406225147399.gif"> <img src="http://img.hksite.cn/2019-03-01-20160406225147399.gif" alt=""> </a></p>
+<h2 id="3-2插入排序的内部循环不变性"><a href="#3-2插入排序的内部循环不变性" class="headerlink" title="3.2插入排序的内部循环不变性"></a>3.2插入排序的内部循环不变性</h2><p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072143.jpg"> <img src="http://img.hksite.cn/2019-03-01-072143.jpg" alt=""> </a></p>
+<h2 id="3-3插入排序代码"><a href="#3-3插入排序代码" class="headerlink" title="3.3插入排序代码"></a>3.3插入排序代码</h2><pre><code class="java">public class Insertion
+{
+   public static void sort(Comparable[] a)
+   {
+      int N = a.length;
+      for (int i = 0; i &lt; N; i++)
+         for (int j = i; j &gt; 0; j--)
+            if (less(a[j], a[j-1]))
+               exch(a, j, j-1);
+            else break;
+   }
+   private static boolean less(Comparable v, Comparable w)
+   {  
+/* as before */
+  }
+   private static void exch(Comparable[] a, int i, int j)
+   {  
+/* as before */
+  }
+}
+</code></pre>
+<h2 id="3-4-插入排序分析"><a href="#3-4-插入排序分析" class="headerlink" title="3.4 插入排序分析"></a>3.4 插入排序分析</h2><p>插入排序最好的情况是比较N-1次0次交换，最坏的情况要N22次比较和N22次交换 </p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072158.jpg"> <img src="http://img.hksite.cn/2019-03-01-072158.jpg" alt=""> </a></p>
+<p>插入排序对于<strong>部分有序的数组</strong>效率挺高的，特别是对于小数组 </p>
+<p><a data-fancybox="gallery" href="http://img.hksite.cn/2019-03-01-072205.jpg"> <img src="http://img.hksite.cn/2019-03-01-072205.jpg" alt=""> </a></p>
+
+      </div>
+    </div>
+    <div class="card">
+      
+  <nav class="pagination">
+    
+      <a class="prev" href="/algorithm/st3/">
+        <i class="far icon-left"></i>
+        <span class="prev-text nav-default">符号表ST（3）——二叉查找树 （附动画）</span>
+      </a>
+    
+    
+      <a class="next" href="/algorithm/sort2/">
+        <span class="next-text nav-default">元素排序(2)——希尔排序</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
+
+
+    </div>
+  </div>
+</article>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    <div class="inner">
+      
+<div class="copyright">
+  Copyright
+  
+  &copy;
+  
+  <span itemprop="copyrightYear">2019</span>
+  </span>
+  <span class="author" itemprop="copyrightHolder">hawkeye(黄锴)</span>
+  <div class='host'>
+    博客托管于 <a href="https://pages.github.com/" target="_blank">GitHub Pages</a> 
+  </div>
+  <div class="power">
+    由 <a href="https://hexo.io" target="_blank">Hexo</a> 强力驱动
+    |
+    主题 - <a href="https://github.com/hk029/hexo-theme-airy/" target="_blank">airy</a>
+  </div>
+</div>
+
+    </div>
+
+    
+    
+    
+    <script src="/lib/prism/prism.js"></script>
+    
+    <script src="/lib/jquery/jquery.min.js"></script>
+    
+    <script src="/lib/fancybox/fancybox.min.js"></script>
+    
+    <script src="/js/airy.js"></script>
+    
+    
+
+    
+    
+    
+    <script src="/js/scrollspy.js"></script>
+    
+    
+</body>
+
+</html>
